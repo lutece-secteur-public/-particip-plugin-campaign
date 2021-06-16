@@ -1,0 +1,60 @@
+<#include "managecampaigns_tabs.html" />
+<@tabs2 tab="area" />
+
+<@box>
+	<@boxHeader title='#i18n{campaign.manage_area.title}' boxTools=true>
+		<@tform class='form-inline pull-right' name='manage_area' action='jsp/admin/plugins/campaign/ManageAreas.jsp'>
+			<@button type='submit' name='view_createArea' buttonIcon='plus' title='#i18n{campaign.manage_areas.buttonAdd}' />
+		</@tform>
+	</@boxHeader>
+	<@boxBody>    
+    <@messages infos=infos />
+    <@paginationAdmin paginator=paginator combo=1 />
+    <div class="clearfix"></div>
+    <@table>
+        <tr>
+            <input type="hidden" id="id" name="id"/>
+            <th>#i18n{campaign.manage_areas.columnIdCampaign}</th>
+            <th>#i18n{campaign.manage_areas.columnTitle}</th>
+            <th>#i18n{campaign.manage_areas.columnType}</th>
+            <th>#i18n{campaign.manage_areas.columnNumberVotes}</th>
+            <th>#i18n{campaign.manage_areas.columnActive}</th>
+            <th>#i18n{portal.util.labelActions}</th>
+        </tr>
+        <@tableHeadBodySeparator />
+        <#list area_list as area >
+        <tr>
+            <input type="hidden" id="id" name="id"/>
+            <td>
+            <#list campaign_list as campaign>
+            	<#if campaign.code?number == area.idCampaign>
+					${campaign.name}
+				</#if>
+			</#list>
+			</td>
+            <td>
+				${area.title}
+			</td>
+            <td>
+				${area.type}
+			</td>
+            <td>
+				${area.numberVotes}
+			</td>
+            <td>
+				${area.active?c}
+			</td>
+        	<td>
+				<@aButton href='jsp/admin/plugins/campaign/ManageAreas.jsp?view=modifyArea&id=${area.id}' title='#i18n{portal.util.labelModify}' hideTitle=['all'] buttonIcon='pencil' />
+						
+				<@aButton href='jsp/admin/plugins/campaign/ManageAreas.jsp?action=confirmRemoveArea&id=${area.id}' title='#i18n{portal.util.labelDelete}' buttonIcon='trash' hideTitle=['all'] color='btn-danger'  />
+
+	        </td>
+        </tr>
+        </#list>
+    </@table>
+
+    <@paginationAdmin paginator=paginator />
+
+  </@boxBody>
+</@box>

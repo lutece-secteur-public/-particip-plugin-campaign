@@ -1,0 +1,34 @@
+<#include "managecampaigns_tabs.html" />
+<@tabs2 tab="theme" />
+<@box>
+	<@boxHeader title='#i18n{campaign.create_theme.title}' />
+	<@boxBody>
+    <@tform name='create_theme' action='jsp/admin/plugins/campaign/ManageThemes.jsp'>
+
+        <@messages errors=errors />
+        <input type="hidden" id="id" name="id"/>
+        <input type="hidden" value="${token}" name="token" />
+
+		<@formGroup labelFor='id_campaign' labelKey='#i18n{campaign.modify_theme.labelIdCampaign}' mandatory=true>
+			<@select name='id_campaign' items=campaign_list default_value='${theme.idCampaign}' sort=true size='sm' />
+		</@formGroup>
+		<@formGroup labelFor='title' labelKey='#i18n{campaign.modify_theme.labelTitle}' mandatory=true>
+          	<@input type='text' id='title' name='title'  maxlength=255 value='${theme.title!\'\'}' tabIndex='1' />
+		</@formGroup>
+		<@formGroup labelFor='description' labelKey='#i18n{campaign.modify_theme.labelDescription}' mandatory=true>
+          	<@input type='text' id='description' name='description'  value='${theme.description!\'\'}' tabIndex='2' />
+		</@formGroup>
+		<@formGroup labelFor='active' labelKey='#i18n{campaign.modify_theme.labelActive}' mandatory=true>
+			<@checkBox id="active" name="active"  value="1" checked=theme.active!'false' tabIndex='3' />
+		</@formGroup>
+		<@formGroup labelFor='front_rgb' labelKey='#i18n{campaign.modify_theme.labelFrontRgb}' mandatory=true>	       
+			<input class="form-control" id="front_rgb" name="front_rgb" type="color" value=""  />
+		</@formGroup>
+		<@formGroup labelFor='image_file' labelKey='#i18n{campaign.modify_theme.labelImageFile}' mandatory=true>
+          	<@input type='text' id='image_file' name='image_file'  value='${theme.imageFile!\'\'}' tabIndex='5' />
+		</@formGroup>
+				
+		<@actionButtons button1Name="action_createTheme" button2Name="view_manageTheme"/>
+    </@tform>
+	</@boxBody>
+</@box>

@@ -1,0 +1,19 @@
+<#macro tabs2 tab >
+<@tabs>
+	<@tabList>
+			<li <#if tab="campaign">class="active"</#if>>
+				<@aButton href="jsp/admin/plugins/campaign/ManageCampaigns.jsp">#i18n{campaign.manage_campaigns.pageTitle}</@aButton>
+			</li>
+			<li <#if tab="phase">class="active"</#if>>
+				<@aButton href="jsp/admin/plugins/campaign/ManagePhases.jsp">#i18n{campaign.manage_phases.pageTitle}</@aButton>
+			</li>
+			<li <#if tab="theme">class="active"</#if>>
+				<@aButton href="jsp/admin/plugins/campaign/ManageThemes.jsp">#i18n{campaign.manage_themes.pageTitle}</@aButton>
+			</li>
+			<li <#if tab="area">class="active"</#if>>
+				<@aButton href="jsp/admin/plugins/campaign/ManageAreas.jsp">#i18n{campaign.manage_areas.pageTitle}</@aButton>
+			</li>
+	</@tabList>
+</@tabs>
+
+</#macro>

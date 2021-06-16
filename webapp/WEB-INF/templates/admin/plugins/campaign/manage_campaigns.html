@@ -1,0 +1,52 @@
+<#include "managecampaigns_tabs.html" />
+<@tabs2 tab="campaign" />
+
+<@box>
+	<@boxHeader title='#i18n{campaign.manage_campaign.title}' boxTools=true>
+		<@tform class='form-inline pull-right' name='manage_campaign' action='jsp/admin/plugins/campaign/ManageCampaigns.jsp'>
+			<@button type='submit' name='view_createCampaign' buttonIcon='plus' title='#i18n{campaign.manage_campaigns.buttonAdd}' />
+		</@tform>
+	</@boxHeader>
+	<@boxBody>    
+    <@messages infos=infos />
+    <@paginationAdmin paginator=paginator combo=1 />
+    <div class="clearfix"></div>
+    <@table>
+        <tr>
+            <input type="hidden" id="id" name="id"/>
+            <th>#i18n{campaign.manage_campaigns.columnCodeCampaign}</th>
+            <th>#i18n{campaign.manage_campaigns.columnTitle}</th>
+            <th>#i18n{campaign.manage_campaigns.columnDescription}</th>
+            <th>#i18n{campaign.manage_campaigns.columnActive}</th>
+            <th>#i18n{portal.util.labelActions}</th>
+        </tr>
+        <@tableHeadBodySeparator />
+        <#list campaign_list as campaign >
+        <tr>
+            <input type="hidden" id="id" name="id"/>
+            <td>
+				${campaign.codeCampaign}
+			</td>
+            <td>
+				${campaign.title}
+			</td>
+            <td>
+				${campaign.description}
+			</td>
+            <td>
+				${campaign.active?c}
+			</td>
+        	<td>
+				<@aButton href='jsp/admin/plugins/campaign/ManageCampaigns.jsp?view=modifyCampaign&id=${campaign.id}' title='#i18n{portal.util.labelModify}' hideTitle=['all'] buttonIcon='pencil' />
+						
+				<@aButton href='jsp/admin/plugins/campaign/ManageCampaigns.jsp?action=confirmRemoveCampaign&id=${campaign.id}' title='#i18n{portal.util.labelDelete}' buttonIcon='trash' hideTitle=['all'] color='btn-danger'  />
+
+	        </td>
+        </tr>
+        </#list>
+    </@table>
+
+    <@paginationAdmin paginator=paginator />
+
+  </@boxBody>
+</@box>

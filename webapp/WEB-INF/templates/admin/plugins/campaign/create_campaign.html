@@ -1,0 +1,28 @@
+<#include "managecampaigns_tabs.html" />
+<@tabs2 tab="campaign" />
+<@box>
+	<@boxHeader title='#i18n{campaign.create_campaign.title}' />
+	<@boxBody>
+    <@tform name='create_campaign' action='jsp/admin/plugins/campaign/ManageCampaigns.jsp'>
+
+        <@messages errors=errors />
+        <input type="hidden" id="id" name="id"/>
+        <input type="hidden" value="${token}" name="token" />
+
+		<@formGroup labelFor='code_campaign' labelKey='#i18n{campaign.modify_campaign.labelCodeCampaign}' mandatory=true>
+          	<@input type='text' id='code_campaign' name='code_campaign'  maxlength=50 value='${campaign.codeCampaign!\'\'}' tabIndex='0' />
+		</@formGroup>
+		<@formGroup labelFor='title' labelKey='#i18n{campaign.modify_campaign.labelTitle}' mandatory=true>
+          	<@input type='text' id='title' name='title'  maxlength=255 value='${campaign.title!\'\'}' tabIndex='1' />
+		</@formGroup>
+		<@formGroup labelFor='description' labelKey='#i18n{campaign.modify_campaign.labelDescription}' mandatory=true>
+          	<@input type='text' id='description' name='description'  value='${campaign.description!\'\'}' tabIndex='2' />
+		</@formGroup>
+		<@formGroup labelFor='active' labelKey='#i18n{campaign.modify_campaign.labelActive}' mandatory=true>
+			<@checkBox id="active" name="active"  value="1" checked=campaign.active!'false' tabIndex='3' />
+		</@formGroup>
+				
+		<@actionButtons button1Name="action_createCampaign" button2Name="view_manageCampaign"/>
+    </@tform>
+	</@boxBody>
+</@box>

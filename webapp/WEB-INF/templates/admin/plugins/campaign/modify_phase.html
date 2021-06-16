@@ -1,0 +1,30 @@
+<#include "managecampaigns_tabs.html" />
+<@tabs2 tab="phase" />
+
+<@box>
+	<@boxHeader title='#i18n{campaign.modify_phase.title}' />
+	<@boxBody>
+    <@tform class="form-horizontal" method="post" name="modify_phase" action="jsp/admin/plugins/campaign/ManagePhases.jsp">
+			<@messages errors=errors />
+			<input type="hidden" id="id" name="id" value="${phase.id}"/>
+			<input type="hidden" value="${token}" name="token" />
+			
+			<@formGroup labelFor='id_campaign' labelKey='#i18n{campaign.modify_phase.labelIdCampaign}' mandatory=true>
+		 		<@select name='id_campaign' items=campaign_list default_value='${phase.idCampaign}' sort=true size='sm' />
+			</@formGroup>
+			<@formGroup labelFor='starting_date' labelKey='#i18n{campaign.modify_phase.labelStartingDate}' mandatory=true>
+			<@input type='datetime' id='start_date_time' name='start_date_time'  value='${phase.startingDate!\'\'}'  tabIndex='1' /> 
+			</@formGroup>
+			<@formGroup labelFor='ending_date' labelKey='#i18n{campaign.modify_phase.labelEndingDate}' mandatory=true>
+          	<@input type='datetime' id='end_date_time' name='end_date_time'  value='${phase.endingDate!\'\'}' tabIndex='2' />
+			</@formGroup>
+			<@formGroup labelFor='label' labelKey='#i18n{campaign.modify_phase.labelLabel}' mandatory=true>
+          		<@input type='text' id='label' name='label'  maxlength=255 value='${phase.label!\'\'}' tabIndex='3' />
+			</@formGroup>
+			<@formGroup labelFor='order_num' labelKey='#i18n{campaign.modify_phase.labelOrderNum}' mandatory=true>
+          		<@input type='text' id='order_num' name='order_num'  value='${phase.orderNum!\'\'}' tabIndex='4' />
+			</@formGroup>
+        <@actionButtons button1Name="action_modifyPhase" button2Name="view_managePhase"/>
+    </@tform>
+	</@boxBody>
+</@box>
