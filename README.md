@@ -1,1 +1,1 @@
-# -particip-plugin-campaign
+# particip-plugin-campaign
