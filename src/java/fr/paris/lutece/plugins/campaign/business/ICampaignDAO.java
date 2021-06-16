@@ -113,4 +113,5 @@ public interface ICampaignDAO
      * @return The referenceList which contains the data of all the campaign objects
      */
     ReferenceList selectCampaignsReferenceList( Plugin plugin );
+
 }

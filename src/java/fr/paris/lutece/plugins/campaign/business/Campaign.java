@@ -49,7 +49,7 @@ public class Campaign implements Serializable
 
     @NotEmpty( message = "#i18n{campaign.validation.campaign.CodeCampaign.notEmpty}" )
     @Size( max = 50, message = "#i18n{campaign.validation.campaign.CodeCampaign.size}" )
-    private String _strCodeCampaign;
+    private String _strCampaignCode;
 
     @NotEmpty( message = "#i18n{campaign.validation.campaign.Title.notEmpty}" )
     @Size( max = 255, message = "#i18n{campaign.validation.campaign.Title.size}" )
@@ -86,9 +86,9 @@ public class Campaign implements Serializable
      * 
      * @return The CodeCampaign
      */
-    public String getCodeCampaign( )
+    public String getCampaignCode( )
     {
-        return _strCodeCampaign;
+        return _strCampaignCode;
     }
 
     /**
@@ -97,9 +97,9 @@ public class Campaign implements Serializable
      * @param strCodeCampaign
      *            The CodeCampaign
      */
-    public void setCodeCampaign( String strCodeCampaign )
+    public void setCampaignCode( String strCampaignCode )
     {
-        _strCodeCampaign = strCodeCampaign;
+        _strCampaignCode = strCampaignCode;
     }
 
     /**

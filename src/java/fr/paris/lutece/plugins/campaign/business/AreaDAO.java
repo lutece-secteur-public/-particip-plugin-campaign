@@ -48,11 +48,11 @@ import java.util.List;
 public final class AreaDAO implements IAreaDAO
 {
     // Constants
-    private static final String SQL_QUERY_SELECT = "SELECT id_area, id_campaign, title, type, number_votes, active FROM campaign_area WHERE id_area = ?";
-    private static final String SQL_QUERY_INSERT = "INSERT INTO campaign_area ( id_campaign, title, type, number_votes, active ) VALUES ( ?, ?, ?, ?, ? ) ";
+    private static final String SQL_QUERY_SELECT = "SELECT id_area, campaign_code, title, type, number_votes, active FROM campaign_area WHERE id_area = ?";
+    private static final String SQL_QUERY_INSERT = "INSERT INTO campaign_area ( campaign_code, title, type, number_votes, active ) VALUES ( ?, ?, ?, ?, ? ) ";
     private static final String SQL_QUERY_DELETE = "DELETE FROM campaign_area WHERE id_area = ? ";
-    private static final String SQL_QUERY_UPDATE = "UPDATE campaign_area SET id_area = ?, id_campaign = ?, title = ?, type = ?, number_votes = ?, active = ? WHERE id_area = ?";
-    private static final String SQL_QUERY_SELECTALL = "SELECT id_area, id_campaign, title, type, number_votes, active FROM campaign_area";
+    private static final String SQL_QUERY_UPDATE = "UPDATE campaign_area SET id_area = ?, campaign_code = ?, title = ?, type = ?, number_votes = ?, active = ? WHERE id_area = ?";
+    private static final String SQL_QUERY_SELECTALL = "SELECT id_area, campaign_code, title, type, number_votes, active FROM campaign_area";
     private static final String SQL_QUERY_SELECTALL_ID = "SELECT id_area FROM campaign_area";
 
     /**
@@ -64,7 +64,7 @@ public final class AreaDAO implements IAreaDAO
         try ( DAOUtil daoUtil = new DAOUtil( SQL_QUERY_INSERT, Statement.RETURN_GENERATED_KEYS, plugin ) )
         {
             int nIndex = 1;
-            daoUtil.setInt( nIndex++, area.getIdCampaign( ) );
+            daoUtil.setString( nIndex++, area.getCampaignCode( ) );
             daoUtil.setString( nIndex++, area.getTitle( ) );
             daoUtil.setString( nIndex++, area.getType( ) );
             daoUtil.setInt( nIndex++, area.getNumberVotes( ) );
@@ -97,7 +97,7 @@ public final class AreaDAO implements IAreaDAO
                 int nIndex = 1;
 
                 area.setId( daoUtil.getInt( nIndex++ ) );
-                area.setIdCampaign( daoUtil.getInt( nIndex++ ) );
+                area.setCampaignCode( daoUtil.getString( nIndex++ ) );
                 area.setTitle( daoUtil.getString( nIndex++ ) );
                 area.setType( daoUtil.getString( nIndex++ ) );
                 area.setNumberVotes( daoUtil.getInt( nIndex++ ) );
@@ -134,7 +134,7 @@ public final class AreaDAO implements IAreaDAO
             int nIndex = 1;
 
             daoUtil.setInt( nIndex++, area.getId( ) );
-            daoUtil.setInt( nIndex++, area.getIdCampaign( ) );
+            daoUtil.setString( nIndex++, area.getCampaignCode( ) );
             daoUtil.setString( nIndex++, area.getTitle( ) );
             daoUtil.setString( nIndex++, area.getType( ) );
             daoUtil.setInt( nIndex++, area.getNumberVotes( ) );
@@ -163,7 +163,7 @@ public final class AreaDAO implements IAreaDAO
                 int nIndex = 1;
 
                 area.setId( daoUtil.getInt( nIndex++ ) );
-                area.setIdCampaign( daoUtil.getInt( nIndex++ ) );
+                area.setCampaignCode( daoUtil.getString( nIndex++ ) );
                 area.setTitle( daoUtil.getString( nIndex++ ) );
                 area.setType( daoUtil.getString( nIndex++ ) );
                 area.setNumberVotes( daoUtil.getInt( nIndex++ ) );

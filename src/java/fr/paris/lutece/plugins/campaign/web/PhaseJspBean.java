@@ -76,6 +76,8 @@ public class PhaseJspBean extends AbstractManageCampaignsJspBean
     // Markers
     private static final String MARK_PHASE_LIST = "phase_list";
     private static final String MARK_CAMPAIGN_LIST = "campaign_list";
+    private static final String MARK_PHASE_TYPE_LIST = "phase_type_list";
+
     private static final String MARK_PHASE = "phase";
 
     private static final String PARAMETER_STARTING_DATE_TIME = "start_date_time";
@@ -141,6 +143,7 @@ public class PhaseJspBean extends AbstractManageCampaignsJspBean
         Map<String, Object> model = getModel( );
         model.put( MARK_PHASE, _phase );
         model.put( MARK_CAMPAIGN_LIST, CampaignHome.getCampaignsReferenceList( ) );
+        model.put( MARK_PHASE_TYPE_LIST, PhaseHome.getPhasesTypeReferenceList( ) );
         model.put( SecurityTokenService.MARK_TOKEN, SecurityTokenService.getInstance( ).getToken( request, ACTION_CREATE_PHASE ) );
 
         return getPage( PROPERTY_PAGE_TITLE_CREATE_PHASE, TEMPLATE_CREATE_PHASE, model );
@@ -237,6 +240,7 @@ public class PhaseJspBean extends AbstractManageCampaignsJspBean
         Map<String, Object> model = getModel( );
         model.put( MARK_PHASE, _phase );
         model.put( MARK_CAMPAIGN_LIST, CampaignHome.getCampaignsReferenceList( ) );
+        model.put( MARK_PHASE_TYPE_LIST, PhaseHome.getPhasesTypeReferenceList( ) );
         model.put( SecurityTokenService.MARK_TOKEN, SecurityTokenService.getInstance( ).getToken( request, ACTION_MODIFY_PHASE ) );
 
         return getPage( PROPERTY_PAGE_TITLE_MODIFY_PHASE, TEMPLATE_MODIFY_PHASE, model );

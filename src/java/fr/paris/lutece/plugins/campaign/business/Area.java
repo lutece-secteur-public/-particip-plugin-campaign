@@ -47,8 +47,7 @@ public class Area implements Serializable
     // Variables declarations
     private int _nId;
 
-    private int _nIdCampaign;
-
+    private String _strCampaignCode;
     @NotEmpty( message = "#i18n{campaign.validation.area.Title.notEmpty}" )
     @Size( max = 255, message = "#i18n{campaign.validation.area.Title.size}" )
     private String _strTitle;
@@ -82,24 +81,24 @@ public class Area implements Serializable
     }
 
     /**
-     * Returns the IdCampaign
+     * Returns the CampaignCode
      * 
-     * @return The IdCampaign
+     * @return The CampaignCode
      */
-    public int getIdCampaign( )
+    public String getCampaignCode( )
     {
-        return _nIdCampaign;
+        return _strCampaignCode;
     }
 
     /**
-     * Sets the IdCampaign
+     * Sets the CampaignCode
      * 
-     * @param nIdCampaign
-     *            The IdCampaign
+     * @param CampaignCode
+     *            The CampaignCode
      */
-    public void setIdCampaign( int nIdCampaign )
+    public void setCampaignCode( String strCampaignCode )
     {
-        _nIdCampaign = nIdCampaign;
+    	_strCampaignCode = strCampaignCode;
     }
 
     /**

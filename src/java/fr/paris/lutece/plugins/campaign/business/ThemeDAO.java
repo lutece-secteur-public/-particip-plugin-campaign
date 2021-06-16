@@ -48,11 +48,11 @@ import java.util.List;
 public final class ThemeDAO implements IThemeDAO
 {
     // Constants
-    private static final String SQL_QUERY_SELECT = "SELECT id_theme, id_campaign, title, description, active, front_rgb, image_file FROM campaign_theme WHERE id_theme = ?";
-    private static final String SQL_QUERY_INSERT = "INSERT INTO campaign_theme ( id_campaign, title, description, active, front_rgb, image_file ) VALUES ( ?, ?, ?, ?, ?, ? ) ";
+    private static final String SQL_QUERY_SELECT = "SELECT id_theme, campaign_code, title, description, active, front_rgb, image_file FROM campaign_theme WHERE id_theme = ?";
+    private static final String SQL_QUERY_INSERT = "INSERT INTO campaign_theme ( campaign_code, title, description, active, front_rgb, image_file ) VALUES ( ?, ?, ?, ?, ?, ? ) ";
     private static final String SQL_QUERY_DELETE = "DELETE FROM campaign_theme WHERE id_theme = ? ";
-    private static final String SQL_QUERY_UPDATE = "UPDATE campaign_theme SET id_theme = ?, id_campaign = ?, title = ?, description = ?, active = ?, front_rgb = ?, image_file = ? WHERE id_theme = ?";
-    private static final String SQL_QUERY_SELECTALL = "SELECT id_theme, id_campaign, title, description, active, front_rgb, image_file FROM campaign_theme";
+    private static final String SQL_QUERY_UPDATE = "UPDATE campaign_theme SET id_theme = ?, campaign_code = ?, title = ?, description = ?, active = ?, front_rgb = ?, image_file = ? WHERE id_theme = ?";
+    private static final String SQL_QUERY_SELECTALL = "SELECT id_theme, campaign_code, title, description, active, front_rgb, image_file FROM campaign_theme";
     private static final String SQL_QUERY_SELECTALL_ID = "SELECT id_theme FROM campaign_theme";
 
     /**
@@ -64,7 +64,7 @@ public final class ThemeDAO implements IThemeDAO
         try ( DAOUtil daoUtil = new DAOUtil( SQL_QUERY_INSERT, Statement.RETURN_GENERATED_KEYS, plugin ) )
         {
             int nIndex = 1;
-            daoUtil.setInt( nIndex++, theme.getIdCampaign( ) );
+            daoUtil.setString( nIndex++, theme.getCampaignCode( ) );
             daoUtil.setString( nIndex++, theme.getTitle( ) );
             daoUtil.setString( nIndex++, theme.getDescription( ) );
             daoUtil.setBoolean( nIndex++, theme.getActive( ) );
@@ -98,7 +98,7 @@ public final class ThemeDAO implements IThemeDAO
                 int nIndex = 1;
 
                 theme.setId( daoUtil.getInt( nIndex++ ) );
-                theme.setIdCampaign( daoUtil.getInt( nIndex++ ) );
+                theme.setCampaignCode( daoUtil.getString( nIndex++ ) );
                 theme.setTitle( daoUtil.getString( nIndex++ ) );
                 theme.setDescription( daoUtil.getString( nIndex++ ) );
                 theme.setActive( daoUtil.getBoolean( nIndex++ ) );
@@ -136,7 +136,7 @@ public final class ThemeDAO implements IThemeDAO
             int nIndex = 1;
 
             daoUtil.setInt( nIndex++, theme.getId( ) );
-            daoUtil.setInt( nIndex++, theme.getIdCampaign( ) );
+            daoUtil.setString( nIndex++, theme.getCampaignCode( ) );
             daoUtil.setString( nIndex++, theme.getTitle( ) );
             daoUtil.setString( nIndex++, theme.getDescription( ) );
             daoUtil.setBoolean( nIndex++, theme.getActive( ) );
@@ -166,7 +166,7 @@ public final class ThemeDAO implements IThemeDAO
                 int nIndex = 1;
 
                 theme.setId( daoUtil.getInt( nIndex++ ) );
-                theme.setIdCampaign( daoUtil.getInt( nIndex++ ) );
+                theme.setCampaignCode( daoUtil.getString( nIndex++ ) );
                 theme.setTitle( daoUtil.getString( nIndex++ ) );
                 theme.setDescription( daoUtil.getString( nIndex++ ) );
                 theme.setActive( daoUtil.getBoolean( nIndex++ ) );

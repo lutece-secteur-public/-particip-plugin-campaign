@@ -9,8 +9,11 @@
 			<input type="hidden" id="id" name="id" value="${phase.id}"/>
 			<input type="hidden" value="${token}" name="token" />
 			
-			<@formGroup labelFor='id_campaign' labelKey='#i18n{campaign.modify_phase.labelIdCampaign}' mandatory=true>
-		 		<@select name='id_campaign' items=campaign_list default_value='${phase.idCampaign}' sort=true size='sm' />
+			<@formGroup labelFor='campaign_code' labelKey='#i18n{campaign.modify_phase.labelIdCampaign}' mandatory=true>
+		 		<@select name='campaign_code' items=campaign_list default_value='${phase.campaignCode}' sort=true size='sm' />
+			</@formGroup>
+			<@formGroup labelFor='code_phase_type' labelKey='#i18n{campaign.modify_phase.labelPhaseType}' mandatory=true>
+		 		<@select name='code_phase_type' items=phase_type_list default_value='${phase.codePhaseType!}' sort=true size='sm' />
 			</@formGroup>
 			<@formGroup labelFor='starting_date' labelKey='#i18n{campaign.modify_phase.labelStartingDate}' mandatory=true>
 			<@input type='datetime' id='start_date_time' name='start_date_time'  value='${phase.startingDate!\'\'}'  tabIndex='1' /> 

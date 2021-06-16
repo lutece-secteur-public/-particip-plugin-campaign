@@ -136,4 +136,5 @@ public final class CampaignHome
     {
         return _dao.selectCampaignsReferenceList( _plugin );
     }
+
 }

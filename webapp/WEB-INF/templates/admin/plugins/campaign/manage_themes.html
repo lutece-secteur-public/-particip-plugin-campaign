@@ -28,7 +28,7 @@
             <input type="hidden" id="id" name="id"/>
             <td>
 				<#list campaign_list as campaign>
-            	<#if campaign.code?number == theme.idCampaign>
+            	<#if campaign.code == theme.campaignCode>
 					${campaign.name}
 				</#if>
 			</#list>

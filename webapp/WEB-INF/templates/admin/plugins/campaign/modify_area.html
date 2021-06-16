@@ -9,8 +9,8 @@
 			<input type="hidden" id="id" name="id" value="${area.id}"/>
 			<input type="hidden" value="${token}" name="token" />
 			
-			<@formGroup labelFor='id_campaign' labelKey='#i18n{campaign.modify_area.labelIdCampaign}' mandatory=true>
-		 	<@select name='id_campaign' items=campaign_list default_value='${area.idCampaign}' sort=true size='sm' />
+			<@formGroup labelFor='campaign_code' labelKey='#i18n{campaign.modify_area.labelIdCampaign}' mandatory=true>
+		 	<@select name='campaign_code' items=campaign_list default_value='${area.campaignCode}' sort=true size='sm' />
 			</@formGroup>
 			<@formGroup labelFor='title' labelKey='#i18n{campaign.modify_area.labelTitle}' mandatory=true>
           		<@input type='text' id='title' name='title'  maxlength=255 value='${area.title!\'\'}' tabIndex='1' />

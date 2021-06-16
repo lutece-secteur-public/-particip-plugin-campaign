@@ -51,7 +51,7 @@ public class Phase implements Serializable
     // Variables declarations
     private int _nId;
 
-    private int _nIdCampaign;
+    private String _strCampaignCode;
     @NotNull( message = "#i18n{portal.validation.message.notEmpty}" )
     private LocalDateTime _dateStartingDate;
     @NotNull( message = "#i18n{portal.validation.message.notEmpty}" )
@@ -62,6 +62,10 @@ public class Phase implements Serializable
     private String _strLabel;
 
     private int _nOrderNum;
+    
+    @NotEmpty( message = "#i18n{campaign.validation.phase.CodePhaseType.notEmpty}" )
+    @Size( max = 50, message = "#i18n{campaign.validation.phase.CodePhaseType.size}" )
+    private String _strCodePhaseType;
 
     /**
      * Returns the Id
@@ -85,24 +89,24 @@ public class Phase implements Serializable
     }
 
     /**
-     * Returns the IdCampaign
+     * Returns the CampaignCode
      * 
-     * @return The IdCampaign
+     * @return The CampaignCode
      */
-    public int getIdCampaign( )
+    public String getCampaignCode( )
     {
-        return _nIdCampaign;
+        return _strCampaignCode;
     }
 
     /**
-     * Sets the IdCampaign
+     * Sets the CampaignCode
      * 
-     * @param nIdCampaign
-     *            The IdCampaign
+     * @param CampaignCode
+     *            The CampaignCode
      */
-    public void setIdCampaign( int nIdCampaign )
+    public void setCampaignCode( String strCampaignCode )
     {
-        _nIdCampaign = nIdCampaign;
+    	_strCampaignCode = strCampaignCode;
     }
 
     /**
@@ -245,5 +249,25 @@ public class Phase implements Serializable
     public void setOrderNum( int nOrderNum )
     {
         _nOrderNum = nOrderNum;
+    }
+    /**
+     * Returns the CodePhaseType
+     * 
+     * @return The CodePhaseType
+     */
+    public String getCodePhaseType( )
+    {
+        return _strCodePhaseType;
+    }
+
+    /**
+     * Sets the CodePhaseType
+     * 
+     * @param strCodePhaseType
+     *            The CodePhaseType
+     */
+    public void setCodePhaseType( String strCodePhaseType )
+    {
+        _strCodePhaseType = strCodePhaseType;
     }
 }

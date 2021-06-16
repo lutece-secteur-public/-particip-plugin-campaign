@@ -1,6 +1,6 @@
 <#include "managecampaigns_tabs.html" />
 <@tabs2 tab="phase" />
-
+<#assign now = .now >
 <@box>
 	<@boxHeader title='#i18n{campaign.manage_phase.title}' boxTools=true>
 		<@tform class='form-inline pull-right' name='manage_phase' action='jsp/admin/plugins/campaign/ManagePhases.jsp'>
@@ -27,11 +27,15 @@
             <input type="hidden" id="id" name="id"/>
             <td>
 				<#list campaign_list as campaign>
-            	<#if campaign.code?number == phase.idCampaign>
+            	<#if campaign.code == phase.campaignCode>
 					${campaign.name}
 				</#if>
 			</#list>
+			
+ <i class="fa <#if (phase.endingDate?datetime.iso < now) >fa-check<#elseif ( phase.startingDate?datetime.iso > now ) >fa-play<#else>fa-spinner</#if>"></i>
+                &ensp;<span style="color:<#if (phase.endingDate?datetime.iso < now) >#a0a0a0 <#elseif (phase.startingDate?datetime.iso > now )>blue<#else>black</#if>!important;<#if (phase.startingDate?datetime.iso < now) && ( now < phase.endingDate?datetime.iso)> font-weight:bold;background-color:#ffc871</#if>">${phase.codePhaseType!}</span>
 			</td>
+		
             <td>
 				${phase.startingDate}
 			</td>

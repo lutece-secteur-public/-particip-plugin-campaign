@@ -48,12 +48,16 @@ import java.util.List;
 public final class PhaseDAO implements IPhaseDAO
 {
     // Constants
-    private static final String SQL_QUERY_SELECT = "SELECT id_phase, id_campaign, starting_date, ending_date, label, order_num FROM campaign_phase WHERE id_phase = ?";
-    private static final String SQL_QUERY_INSERT = "INSERT INTO campaign_phase ( id_campaign, starting_date, ending_date, label, order_num ) VALUES ( ?, ?, ?, ?, ? ) ";
+    private static final String SQL_QUERY_SELECT = "SELECT id_phase, campaign_code, starting_date, ending_date, label, order_num, phase_type_code FROM campaign_phase WHERE id_phase = ?";
+    private static final String SQL_QUERY_INSERT = "INSERT INTO campaign_phase ( campaign_code, starting_date, ending_date, label, order_num, phase_type_code ) VALUES ( ?, ?, ?, ?, ?, ? ) ";
     private static final String SQL_QUERY_DELETE = "DELETE FROM campaign_phase WHERE id_phase = ? ";
-    private static final String SQL_QUERY_UPDATE = "UPDATE campaign_phase SET id_phase = ?, id_campaign = ?, starting_date = ?, ending_date = ?, label = ?, order_num = ? WHERE id_phase = ?";
-    private static final String SQL_QUERY_SELECTALL = "SELECT id_phase, id_campaign, starting_date, ending_date, label, order_num FROM campaign_phase";
+    private static final String SQL_QUERY_UPDATE = "UPDATE campaign_phase SET id_phase = ?, campaign_code = ?, starting_date = ?, ending_date = ?, label = ?, order_num = ?, phase_type_code = ? WHERE id_phase = ?";
+    private static final String SQL_QUERY_SELECTALL = "SELECT id_phase, campaign_code, starting_date, ending_date, label, order_num, phase_type_code FROM campaign_phase";
     private static final String SQL_QUERY_SELECTALL_ID = "SELECT id_phase FROM campaign_phase";
+    private static final String SQL_QUERY_SELECT_PHASE_TYPE = "SELECT phase_type_code, label FROM campaign_phase_types";
+    private static final String SQL_QUERY_SELECT_BY_CAMPAIGN_AND_CODE_PHASE = "SELECT id_phase, campaign_code, starting_date, ending_date, label, order_num, phase_type_code FROM campaign_phase WHERE campaign_code = ? and phase_type_code = ? ";
+
+
 
     /**
      * {@inheritDoc }
@@ -64,11 +68,12 @@ public final class PhaseDAO implements IPhaseDAO
         try ( DAOUtil daoUtil = new DAOUtil( SQL_QUERY_INSERT, Statement.RETURN_GENERATED_KEYS, plugin ) )
         {
             int nIndex = 1;
-            daoUtil.setInt( nIndex++, phase.getIdCampaign( ) );
+            daoUtil.setString( nIndex++, phase.getCampaignCode( ) );
             daoUtil.setTimestamp( nIndex++, phase.getStartingTimeStampDate( ) );
             daoUtil.setTimestamp( nIndex++, phase.getEndingTimeStampDate( ) );
             daoUtil.setString( nIndex++, phase.getLabel( ) );
             daoUtil.setInt( nIndex++, phase.getOrderNum( ) );
+            daoUtil.setString( nIndex++, phase.getCodePhaseType( ) );
 
             daoUtil.executeUpdate( );
             if ( daoUtil.nextGeneratedKey( ) )
@@ -97,18 +102,49 @@ public final class PhaseDAO implements IPhaseDAO
                 int nIndex = 1;
 
                 phase.setId( daoUtil.getInt( nIndex++ ) );
-                phase.setIdCampaign( daoUtil.getInt( nIndex++ ) );
+                phase.setCampaignCode( daoUtil.getString( nIndex++ ) );
                 phase.setStartingTimeStampDate( daoUtil.getTimestamp( nIndex++ ) );
                 phase.setEndingTimeStampDate( daoUtil.getTimestamp( nIndex++ ) );
                 phase.setLabel( daoUtil.getString( nIndex++ ) );
-                phase.setOrderNum( daoUtil.getInt( nIndex ) );
+                phase.setOrderNum( daoUtil.getInt( nIndex++ ) );
+                phase.setCodePhaseType( daoUtil.getString( nIndex ) );
+
             }
 
-            daoUtil.free( );
             return phase;
         }
     }
 
+    /**
+     * {@inheritDoc }
+     */
+    @Override
+    public Phase findByCampaignCodeAndPhaseTypeCode( String campaignCode, String phaseTypeCode, Plugin plugin )
+    {
+        try ( DAOUtil daoUtil = new DAOUtil( SQL_QUERY_SELECT_BY_CAMPAIGN_AND_CODE_PHASE, plugin ) )
+        {
+            daoUtil.setString( 1, campaignCode );
+            daoUtil.setString( 2, phaseTypeCode );
+            daoUtil.executeQuery( );
+            Phase phase = null;
+
+            if ( daoUtil.next( ) )
+            {
+                phase = new Phase( );
+                int nIndex = 1;
+
+                phase.setId( daoUtil.getInt( nIndex++ ) );
+                phase.setCampaignCode( daoUtil.getString( nIndex++ ) );
+                phase.setStartingTimeStampDate( daoUtil.getTimestamp( nIndex++ ) );
+                phase.setEndingTimeStampDate( daoUtil.getTimestamp( nIndex++ ) );
+                phase.setLabel( daoUtil.getString( nIndex++ ) );
+                phase.setOrderNum( daoUtil.getInt( nIndex++ ) );
+                phase.setCodePhaseType( daoUtil.getString( nIndex ) );
+            }
+
+            return phase;
+        }
+    }
     /**
      * {@inheritDoc }
      */
@@ -119,7 +155,6 @@ public final class PhaseDAO implements IPhaseDAO
         {
             daoUtil.setInt( 1, nKey );
             daoUtil.executeUpdate( );
-            daoUtil.free( );
         }
     }
 
@@ -134,15 +169,16 @@ public final class PhaseDAO implements IPhaseDAO
             int nIndex = 1;
 
             daoUtil.setInt( nIndex++, phase.getId( ) );
-            daoUtil.setInt( nIndex++, phase.getIdCampaign( ) );
+            daoUtil.setString( nIndex++, phase.getCampaignCode( ) );
             daoUtil.setTimestamp( nIndex++, phase.getStartingTimeStampDate( ) );
             daoUtil.setTimestamp( nIndex++, phase.getEndingTimeStampDate( ) );
             daoUtil.setString( nIndex++, phase.getLabel( ) );
             daoUtil.setInt( nIndex++, phase.getOrderNum( ) );
+            daoUtil.setString( nIndex++, phase.getCodePhaseType( ) );
+
             daoUtil.setInt( nIndex, phase.getId( ) );
 
             daoUtil.executeUpdate( );
-            daoUtil.free( );
         }
     }
 
@@ -163,16 +199,15 @@ public final class PhaseDAO implements IPhaseDAO
                 int nIndex = 1;
 
                 phase.setId( daoUtil.getInt( nIndex++ ) );
-                phase.setIdCampaign( daoUtil.getInt( nIndex++ ) );
+                phase.setCampaignCode( daoUtil.getString( nIndex++ ) );
                 phase.setStartingTimeStampDate( daoUtil.getTimestamp( nIndex++ ) );
                 phase.setEndingTimeStampDate( daoUtil.getTimestamp( nIndex++ ) );
                 phase.setLabel( daoUtil.getString( nIndex++ ) );
-                phase.setOrderNum( daoUtil.getInt( nIndex ) );
-
+                phase.setOrderNum( daoUtil.getInt( nIndex++ ) );
+                phase.setCodePhaseType( daoUtil.getString( nIndex ) );
                 phaseList.add( phase );
             }
 
-            daoUtil.free( );
             return phaseList;
         }
     }
@@ -193,7 +228,6 @@ public final class PhaseDAO implements IPhaseDAO
                 phaseList.add( daoUtil.getInt( 1 ) );
             }
 
-            daoUtil.free( );
             return phaseList;
         }
     }
@@ -214,7 +248,25 @@ public final class PhaseDAO implements IPhaseDAO
                 phaseList.addItem( daoUtil.getInt( 1 ), daoUtil.getString( 2 ) );
             }
 
-            daoUtil.free( );
+            return phaseList;
+        }
+    }
+    /**
+     * {@inheritDoc }
+     */
+   @Override
+    public ReferenceList selectPhasesTypeReferenceList( Plugin plugin )
+    {
+        ReferenceList phaseList = new ReferenceList( );
+        try ( DAOUtil daoUtil = new DAOUtil( SQL_QUERY_SELECT_PHASE_TYPE, plugin ) )
+        {
+            daoUtil.executeQuery( );
+
+            while ( daoUtil.next( ) )
+            {
+                phaseList.addItem( daoUtil.getString( 1 ), daoUtil.getString( 2 ) );
+            }
+
             return phaseList;
         }
     }

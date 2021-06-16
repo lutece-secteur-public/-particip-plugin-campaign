@@ -48,12 +48,13 @@ import java.util.List;
 public final class CampaignDAO implements ICampaignDAO
 {
     // Constants
-    private static final String SQL_QUERY_SELECT = "SELECT id_campaign, code_campaign, title, description, active FROM campaign_campaign WHERE id_campaign = ?";
-    private static final String SQL_QUERY_INSERT = "INSERT INTO campaign_campaign ( code_campaign, title, description, active ) VALUES ( ?, ?, ?, ? ) ";
+    private static final String SQL_QUERY_SELECT = "SELECT id_campaign, campaign_code, title, description, active FROM campaign_campaign WHERE id_campaign = ?";
+    private static final String SQL_QUERY_INSERT = "INSERT INTO campaign_campaign ( campaign_code, title, description, active ) VALUES ( ?, ?, ?, ? ) ";
     private static final String SQL_QUERY_DELETE = "DELETE FROM campaign_campaign WHERE id_campaign = ? ";
-    private static final String SQL_QUERY_UPDATE = "UPDATE campaign_campaign SET id_campaign = ?, code_campaign = ?, title = ?, description = ?, active = ? WHERE id_campaign = ?";
-    private static final String SQL_QUERY_SELECTALL = "SELECT id_campaign, code_campaign, title, description, active FROM campaign_campaign";
+    private static final String SQL_QUERY_UPDATE = "UPDATE campaign_campaign SET id_campaign = ?, campaign_code = ?, title = ?, description = ?, active = ? WHERE id_campaign = ?";
+    private static final String SQL_QUERY_SELECTALL = "SELECT id_campaign, campaign_code, title, description, active FROM campaign_campaign";
     private static final String SQL_QUERY_SELECTALL_ID = "SELECT id_campaign FROM campaign_campaign";
+    private static final String SQL_QUERY_SELECTALL_REF = "SELECT campaign_code, title FROM campaign_campaign";
 
     /**
      * {@inheritDoc }
@@ -64,7 +65,7 @@ public final class CampaignDAO implements ICampaignDAO
         try ( DAOUtil daoUtil = new DAOUtil( SQL_QUERY_INSERT, Statement.RETURN_GENERATED_KEYS, plugin ) )
         {
             int nIndex = 1;
-            daoUtil.setString( nIndex++, campaign.getCodeCampaign( ) );
+            daoUtil.setString( nIndex++, campaign.getCampaignCode( ) );
             daoUtil.setString( nIndex++, campaign.getTitle( ) );
             daoUtil.setString( nIndex++, campaign.getDescription( ) );
             daoUtil.setBoolean( nIndex++, campaign.getActive( ) );
@@ -96,13 +97,12 @@ public final class CampaignDAO implements ICampaignDAO
                 int nIndex = 1;
 
                 campaign.setId( daoUtil.getInt( nIndex++ ) );
-                campaign.setCodeCampaign( daoUtil.getString( nIndex++ ) );
+                campaign.setCampaignCode( daoUtil.getString( nIndex++ ) );
                 campaign.setTitle( daoUtil.getString( nIndex++ ) );
                 campaign.setDescription( daoUtil.getString( nIndex++ ) );
                 campaign.setActive( daoUtil.getBoolean( nIndex ) );
             }
 
-            daoUtil.free( );
             return campaign;
         }
     }
@@ -117,7 +117,6 @@ public final class CampaignDAO implements ICampaignDAO
         {
             daoUtil.setInt( 1, nKey );
             daoUtil.executeUpdate( );
-            daoUtil.free( );
         }
     }
 
@@ -132,14 +131,13 @@ public final class CampaignDAO implements ICampaignDAO
             int nIndex = 1;
 
             daoUtil.setInt( nIndex++, campaign.getId( ) );
-            daoUtil.setString( nIndex++, campaign.getCodeCampaign( ) );
+            daoUtil.setString( nIndex++, campaign.getCampaignCode( ) );
             daoUtil.setString( nIndex++, campaign.getTitle( ) );
             daoUtil.setString( nIndex++, campaign.getDescription( ) );
             daoUtil.setBoolean( nIndex++, campaign.getActive( ) );
             daoUtil.setInt( nIndex, campaign.getId( ) );
 
             daoUtil.executeUpdate( );
-            daoUtil.free( );
         }
     }
 
@@ -160,7 +158,7 @@ public final class CampaignDAO implements ICampaignDAO
                 int nIndex = 1;
 
                 campaign.setId( daoUtil.getInt( nIndex++ ) );
-                campaign.setCodeCampaign( daoUtil.getString( nIndex++ ) );
+                campaign.setCampaignCode( daoUtil.getString( nIndex++ ) );
                 campaign.setTitle( daoUtil.getString( nIndex++ ) );
                 campaign.setDescription( daoUtil.getString( nIndex++ ) );
                 campaign.setActive( daoUtil.getBoolean( nIndex ) );
@@ -168,7 +166,6 @@ public final class CampaignDAO implements ICampaignDAO
                 campaignList.add( campaign );
             }
 
-            daoUtil.free( );
             return campaignList;
         }
     }
@@ -189,7 +186,6 @@ public final class CampaignDAO implements ICampaignDAO
                 campaignList.add( daoUtil.getInt( 1 ) );
             }
 
-            daoUtil.free( );
             return campaignList;
         }
     }
@@ -201,17 +197,17 @@ public final class CampaignDAO implements ICampaignDAO
     public ReferenceList selectCampaignsReferenceList( Plugin plugin )
     {
         ReferenceList campaignList = new ReferenceList( );
-        try ( DAOUtil daoUtil = new DAOUtil( SQL_QUERY_SELECTALL, plugin ) )
+        try ( DAOUtil daoUtil = new DAOUtil( SQL_QUERY_SELECTALL_REF, plugin ) )
         {
             daoUtil.executeQuery( );
 
             while ( daoUtil.next( ) )
             {
-                campaignList.addItem( daoUtil.getInt( 1 ), daoUtil.getString( 2 ) );
+                campaignList.addItem( daoUtil.getString( 1 ), daoUtil.getString( 2 ) );
             }
 
-            daoUtil.free( );
             return campaignList;
         }
     }
+    
 }
