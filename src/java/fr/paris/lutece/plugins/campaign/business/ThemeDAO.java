@@ -52,11 +52,11 @@ import java.util.HashMap;
 public final class ThemeDAO implements IThemeDAO
 {
     // Constants
-    private static final String SQL_QUERY_SELECT = "SELECT id_theme, campaign_code, theme_code, title, description, active, front_rgb, image_file FROM campaign_theme WHERE id_theme = ?";
-    private static final String SQL_QUERY_INSERT = "INSERT INTO campaign_theme ( campaign_code, theme_code, title, description, active, front_rgb, image_file ) VALUES ( ?, ?, ?, ?, ?, ?, ? ) ";
+    private static final String SQL_QUERY_SELECT = "SELECT id_theme, campaign_code, code_theme, title, description, active, front_rgb, image_file FROM campaign_theme WHERE id_theme = ?";
+    private static final String SQL_QUERY_INSERT = "INSERT INTO campaign_theme ( campaign_code, code_theme, title, description, active, front_rgb, image_file ) VALUES ( ?, ?, ?, ?, ?, ?, ? ) ";
     private static final String SQL_QUERY_DELETE = "DELETE FROM campaign_theme WHERE id_theme = ? ";
-    private static final String SQL_QUERY_UPDATE = "UPDATE campaign_theme SET id_theme = ?, campaign_code = ?, theme_code = ?, title = ?, description = ?, active = ?, front_rgb = ?, image_file = ? WHERE id_theme = ?";
-    private static final String SQL_QUERY_SELECTALL = "SELECT id_theme, campaign_code, theme_code, title, description, active, front_rgb, image_file FROM campaign_theme";
+    private static final String SQL_QUERY_UPDATE = "UPDATE campaign_theme SET id_theme = ?, campaign_code = ?, code_theme = ?, title = ?, description = ?, active = ?, front_rgb = ?, image_file = ? WHERE id_theme = ?";
+    private static final String SQL_QUERY_SELECTALL = "SELECT id_theme, campaign_code, code_theme, title, description, active, front_rgb, image_file FROM campaign_theme";
     private static final String SQL_QUERY_SELECTALL_BY_CAMPAGNE = SQL_QUERY_SELECTALL + " WHERE code_campagne = ?";
     private static final String SQL_QUERY_SELECTALL_ID = "SELECT id_theme FROM campaign_theme";
     private static final String SQL_QUERY_SELECT_BY_TITLETHEME = "SELECT id_campagne_theme, code_campagne, code_theme, title, description, active, image_file FROM ideation_campagnes_themes WHERE code_theme = ?";
