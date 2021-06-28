@@ -32,42 +32,72 @@
  * License 1.0
  */
 package fr.paris.lutece.plugins.campaign.service;
-import java.util.Collection;
-
-import fr.paris.lutece.plugins.campaign.business.Phase;
-import fr.paris.lutece.plugins.campaign.business.PhaseHome;
 
 /**
- * 
+ *
  */
-public class CampaignPhaseService implements ICampaignPhaseService
+public class NoSuchPhaseException extends RuntimeException
 {
 
-    
-    // SINGLETON
-    private static ICampaignPhaseService _singleton;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
+     * 
+     */
+    public NoSuchPhaseException( )
+    {
+        // TODO Auto-generated constructor stub
+    }
 
     /**
-     * @return CampagneService singleton
+     * @param arg0
+     *            Arg
      */
-    public static ICampaignPhaseService getInstance( )
+    public NoSuchPhaseException( String arg0 )
     {
-        if ( _singleton == null )
-        {
-            _singleton = new CampaignPhaseService( ) ;
-        }
-        return _singleton;
+        super( arg0 );
+        // TODO Auto-generated constructor stub
     }
 
-	@Override
-    public Phase findPhaseByCampaignAndPhaseTypeCode( String campaignCode, String phaseTypeCode ) {
-		
-		return PhaseHome.findByCampaignCodeAndPhaseTypeCode(campaignCode, phaseTypeCode);
-	}
-	
-	@Override
-	public Collection<Phase> getPhasesListByCampaign( String campagneCode )
+    /**
+     * @param arg0
+     *            Arg
+     */
+    public NoSuchPhaseException( Throwable arg0 )
     {
-        return PhaseHome.getPhasesListByCampaign( campagneCode );
+        super( arg0 );
+        // TODO Auto-generated constructor stub
     }
+
+    /**
+     * @param arg0
+     *            Arg
+     * @param arg1
+     *            Arg
+     */
+    public NoSuchPhaseException( String arg0, Throwable arg1 )
+    {
+        super( arg0, arg1 );
+        // TODO Auto-generated constructor stub
+    }
+
+    /**
+     * @param arg0
+     *            Arg
+     * @param arg1
+     *            Arg
+     * @param arg2
+     *            Arg
+     * @param arg3
+     *            Arg
+     */
+    public NoSuchPhaseException( String arg0, Throwable arg1, boolean arg2, boolean arg3 )
+    {
+        super( arg0, arg1, arg2, arg3 );
+        // TODO Auto-generated constructor stub
+    }
+
 }

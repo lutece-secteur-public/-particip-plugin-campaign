@@ -33,41 +33,43 @@
  */
 package fr.paris.lutece.plugins.campaign.service;
 import java.util.Collection;
+import java.util.List;
+import java.util.Map;
 
-import fr.paris.lutece.plugins.campaign.business.Phase;
-import fr.paris.lutece.plugins.campaign.business.PhaseHome;
+import fr.paris.lutece.plugins.campaign.business.Theme;
+import fr.paris.lutece.plugins.campaign.business.ThemeHome;
 
-/**
- * 
- */
-public class CampaignPhaseService implements ICampaignPhaseService
-{
-
+public class CampaignThemeService implements ICampaignThemeService {
+	// SINGLETON
+    private static ICampaignThemeService _singleton;
     
-    // SINGLETON
-    private static ICampaignPhaseService _singleton;
-
     /**
      * @return CampagneService singleton
      */
-    public static ICampaignPhaseService getInstance( )
+    public static ICampaignThemeService getInstance( )
     {
         if ( _singleton == null )
         {
-            _singleton = new CampaignPhaseService( ) ;
+            _singleton = new CampaignThemeService( ) ;
         }
         return _singleton;
     }
-
-	@Override
-    public Phase findPhaseByCampaignAndPhaseTypeCode( String campaignCode, String phaseTypeCode ) {
-		
-		return PhaseHome.findByCampaignCodeAndPhaseTypeCode(campaignCode, phaseTypeCode);
-	}
-	
-	@Override
-	public Collection<Phase> getPhasesListByCampaign( String campagneCode )
+    
+    @Override
+    public Collection<Theme> getThemesListByCampaign( String codeCampaign )
     {
-        return PhaseHome.getPhasesListByCampaign( campagneCode );
+        return ThemeHome.getThemesListByCampaign( codeCampaign );
+    }
+    
+    @Override
+    public Map<String, List<Theme>> getThemesMapByCampaign( )
+    {
+        return ThemeHome.getThemesMapByCampaign( );
+    }
+    
+    @Override
+    public Theme findByCodeTheme( String codeTheme )
+    {
+        return ThemeHome.findByCodeTheme( codeTheme );
     }
 }

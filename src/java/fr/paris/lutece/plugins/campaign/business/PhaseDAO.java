@@ -41,6 +41,7 @@ import java.sql.Statement;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Collection;
 
 /**
  * This class provides Data Access methods for Phase objects
@@ -56,6 +57,7 @@ public final class PhaseDAO implements IPhaseDAO
     private static final String SQL_QUERY_SELECTALL_ID = "SELECT id_phase FROM campaign_phase";
     private static final String SQL_QUERY_SELECT_PHASE_TYPE = "SELECT phase_type_code, label FROM campaign_phase_types";
     private static final String SQL_QUERY_SELECT_BY_CAMPAIGN_AND_CODE_PHASE = "SELECT id_phase, campaign_code, starting_date, ending_date, label, order_num, phase_type_code FROM campaign_phase WHERE campaign_code = ? and phase_type_code = ? ";
+    private static final String SQL_QUERY_SELECTALL_BY_CAMPAIGN = SQL_QUERY_SELECTALL + " WHERE code_campagne = ?";
 
 
 
@@ -269,5 +271,33 @@ public final class PhaseDAO implements IPhaseDAO
 
             return phaseList;
         }
+    }
+    
+    /**
+     * {@inheritDoc }
+     */
+    @Override
+    public Collection<Phase> selectPhasesListByCampaign( String campaignCode, Plugin plugin )
+    {
+        Collection<Phase> PhaseList = new ArrayList<Phase>( );
+        DAOUtil daoUtil = new DAOUtil( SQL_QUERY_SELECTALL_BY_CAMPAIGN, plugin );
+        daoUtil.setString( 1, campaignCode );
+        daoUtil.executeQuery( );
+
+        while ( daoUtil.next( ) )
+        {
+            Phase Phase = new Phase( );
+
+            Phase.setId( daoUtil.getInt( 1 ) );
+            Phase.setLabel( daoUtil.getString( 2 ) );
+            //Phase.setCodeCampagne( daoUtil.getString( 3 ) );
+            Phase.setStartingTimeStampDate( daoUtil.getTimestamp( 4 ) );
+            Phase.setEndingTimeStampDate( daoUtil.getTimestamp( 5 ) );
+
+            PhaseList.add( Phase );
+        }
+
+        daoUtil.free( );
+        return PhaseList;
     }
 }
