@@ -240,7 +240,8 @@ public final class ThemeDAO implements IThemeDAO
         Theme.setTitle( daoUtil.getString( nCpt++ ) );
         Theme.setDescription( daoUtil.getString( nCpt++ ) );
         Theme.setActive( daoUtil.getBoolean( nCpt++ ) );
-        Theme.setImageFile( daoUtil.getInt( nCpt++ ) );
+        Theme.setFrontRgb( daoUtil.getString( nCpt++ ) );
+        Theme.setImageFile(daoUtil.getInt( nCpt++ ));
         return Theme;
     }
 
