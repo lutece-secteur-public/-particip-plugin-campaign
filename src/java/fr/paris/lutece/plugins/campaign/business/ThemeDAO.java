@@ -59,7 +59,7 @@ public final class ThemeDAO implements IThemeDAO
     private static final String SQL_QUERY_SELECTALL = "SELECT id_theme, campaign_code, code_theme, title, description, active, front_rgb, image_file FROM campaign_theme";
     private static final String SQL_QUERY_SELECTALL_BY_CAMPAGNE = SQL_QUERY_SELECTALL + " WHERE code_campagne = ?";
     private static final String SQL_QUERY_SELECTALL_ID = "SELECT id_theme FROM campaign_theme";
-    private static final String SQL_QUERY_SELECT_BY_TITLETHEME = "SELECT id_campagne_theme, code_campagne, code_theme, title, description, active, image_file FROM ideation_campagnes_themes WHERE code_theme = ?";
+    private static final String SQL_QUERY_SELECT_BY_TITLETHEME = "SELECT id_theme, campaign_code, code_theme, title, description, active, front_rgb, image_file FROM campaign_theme WHERE code_theme = ?";
 
     /**
      * {@inheritDoc }
