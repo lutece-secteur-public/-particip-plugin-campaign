@@ -168,16 +168,7 @@ public final class ThemeDAO implements IThemeDAO
 
             while ( daoUtil.next( ) )
             {
-                Theme theme = new Theme( );
-                int nIndex = 1;
-
-                theme.setId( daoUtil.getInt( nIndex++ ) );
-                theme.setCampaignCode( daoUtil.getString( nIndex++ ) );
-                theme.setTitle( daoUtil.getString( nIndex++ ) );
-                theme.setDescription( daoUtil.getString( nIndex++ ) );
-                theme.setActive( daoUtil.getBoolean( nIndex++ ) );
-                theme.setFrontRgb( daoUtil.getString( nIndex++ ) );
-                theme.setImageFile( daoUtil.getInt( nIndex ) );
+                Theme theme = getRow( daoUtil );
 
                 themeList.add( theme );
             }
