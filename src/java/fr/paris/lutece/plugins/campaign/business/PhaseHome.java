@@ -39,6 +39,7 @@ import fr.paris.lutece.portal.service.spring.SpringContextService;
 import fr.paris.lutece.util.ReferenceList;
 
 import java.util.List;
+import java.util.Collection;
 
 /**
  * This class provides instances management methods (create, find, ...) for Phase objects
@@ -158,4 +159,16 @@ public final class PhaseHome
     	return _dao.findByCampaignCodeAndPhaseTypeCode( campaignCode, phaseTypeCode, _plugin);
     }
 
+    
+    /**
+     * Load the data of all the campagnePhase objects for a campagne and returns them in form of a collection
+     * 
+     * @param campagneCode
+     *            the campagne code
+     * @return the collection which contains the data of all the campagnePhase objects
+     */
+    public static Collection<Phase> getPhasesListByCampaign( String campagneCode )
+    {
+        return _dao.selectPhasesListByCampaign( campagneCode, _plugin );
+    }
 }

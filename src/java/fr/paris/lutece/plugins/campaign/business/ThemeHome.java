@@ -39,6 +39,8 @@ import fr.paris.lutece.portal.service.spring.SpringContextService;
 import fr.paris.lutece.util.ReferenceList;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Collection;
 
 /**
  * This class provides instances management methods (create, find, ...) for Theme objects
@@ -136,4 +138,40 @@ public final class ThemeHome
     {
         return _dao.selectThemesReferenceList( _plugin );
     }
+    
+    /**
+     * Load the data of all the campagneTheme objects for a campagne and returns them in form of a collection
+     * 
+     * @param codeCampagne
+     *            Campagne courante
+     * 
+     * @return the collection which contains the data of all the campagneTheme objects
+     */
+    public static Collection<Theme> getThemesListByCampaign( String codeCampaign )
+    {
+        return _dao.selectThemesListByCampaign( codeCampaign, _plugin );
+    }
+    
+    /**
+     * Load the data of all the campagneTheme objects mapped from campagne code and returns them in form of a map
+     * 
+     * @return the collection which contains the data of all the campagneTheme objects
+     */
+    public static Map<String, List<Theme>> getThemesMapByCampaign( )
+    {
+        return _dao.selectThemesMapByCampaign( _plugin );
+    }
+
+    /**
+     * Returns an instance of a campagneTheme whose identifier is specified in parameter
+     * 
+     * @param codeTheme
+     *            The codeTheme
+     * @return an instance of CampagneTheme
+     */
+    public static Theme findByCodeTheme( String codeTheme )
+    {
+        return _dao.loadByCodeTheme( codeTheme, _plugin );
+    }
+
 }

@@ -62,6 +62,10 @@ public class Theme implements Serializable
 
     private int _nImageFile;
 
+    @NotEmpty( message = "#i18n{campaign.validation.theme.Code.notEmpty}" )
+    @Size( max = 50, message = "#i18n{campaign.validation.theme.Code.size}" )
+	private String _strCode;
+
     /**
      * Returns the Id
      * 
@@ -207,4 +211,20 @@ public class Theme implements Serializable
     {
         _nImageFile = nImageFile;
     }
+    
+    /**
+     * @return the Code
+     */
+    public String getCode( )
+    {
+        return _strCode;
+    }
+
+    /**
+     * @param strCode
+     *            the Code to set
+     */
+	public void setCode(String strCode_theme) {
+		this._strCode = strCode_theme;
+	}
 }

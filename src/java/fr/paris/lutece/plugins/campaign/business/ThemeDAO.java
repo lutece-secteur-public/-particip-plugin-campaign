@@ -35,12 +35,16 @@
 package fr.paris.lutece.plugins.campaign.business;
 
 import fr.paris.lutece.portal.service.plugin.Plugin;
+import fr.paris.lutece.portal.business.file.FileHome;
 import fr.paris.lutece.util.ReferenceList;
 import fr.paris.lutece.util.sql.DAOUtil;
 import java.sql.Statement;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Collection;
+import java.util.HashMap;
 
 /**
  * This class provides Data Access methods for Theme objects
@@ -48,12 +52,14 @@ import java.util.List;
 public final class ThemeDAO implements IThemeDAO
 {
     // Constants
-    private static final String SQL_QUERY_SELECT = "SELECT id_theme, campaign_code, title, description, active, front_rgb, image_file FROM campaign_theme WHERE id_theme = ?";
-    private static final String SQL_QUERY_INSERT = "INSERT INTO campaign_theme ( campaign_code, title, description, active, front_rgb, image_file ) VALUES ( ?, ?, ?, ?, ?, ? ) ";
+    private static final String SQL_QUERY_SELECT = "SELECT id_theme, campaign_code, code_theme, title, description, active, front_rgb, image_file FROM campaign_theme WHERE id_theme = ?";
+    private static final String SQL_QUERY_INSERT = "INSERT INTO campaign_theme ( campaign_code, code_theme, title, description, active, front_rgb, image_file ) VALUES ( ?, ?, ?, ?, ?, ?, ? ) ";
     private static final String SQL_QUERY_DELETE = "DELETE FROM campaign_theme WHERE id_theme = ? ";
-    private static final String SQL_QUERY_UPDATE = "UPDATE campaign_theme SET id_theme = ?, campaign_code = ?, title = ?, description = ?, active = ?, front_rgb = ?, image_file = ? WHERE id_theme = ?";
-    private static final String SQL_QUERY_SELECTALL = "SELECT id_theme, campaign_code, title, description, active, front_rgb, image_file FROM campaign_theme";
+    private static final String SQL_QUERY_UPDATE = "UPDATE campaign_theme SET id_theme = ?, campaign_code = ?, code_theme = ?, title = ?, description = ?, active = ?, front_rgb = ?, image_file = ? WHERE id_theme = ?";
+    private static final String SQL_QUERY_SELECTALL = "SELECT id_theme, campaign_code, code_theme, title, description, active, front_rgb, image_file FROM campaign_theme";
+    private static final String SQL_QUERY_SELECTALL_BY_CAMPAGNE = SQL_QUERY_SELECTALL + " WHERE campaign_code = ?";
     private static final String SQL_QUERY_SELECTALL_ID = "SELECT id_theme FROM campaign_theme";
+    private static final String SQL_QUERY_SELECT_BY_TITLETHEME = "SELECT id_theme, campaign_code, code_theme, title, description, active, front_rgb, image_file FROM campaign_theme WHERE code_theme = ?";
 
     /**
      * {@inheritDoc }
@@ -162,16 +168,7 @@ public final class ThemeDAO implements IThemeDAO
 
             while ( daoUtil.next( ) )
             {
-                Theme theme = new Theme( );
-                int nIndex = 1;
-
-                theme.setId( daoUtil.getInt( nIndex++ ) );
-                theme.setCampaignCode( daoUtil.getString( nIndex++ ) );
-                theme.setTitle( daoUtil.getString( nIndex++ ) );
-                theme.setDescription( daoUtil.getString( nIndex++ ) );
-                theme.setActive( daoUtil.getBoolean( nIndex++ ) );
-                theme.setFrontRgb( daoUtil.getString( nIndex++ ) );
-                theme.setImageFile( daoUtil.getInt( nIndex ) );
+                Theme theme = getRow( daoUtil );
 
                 themeList.add( theme );
             }
@@ -221,5 +218,92 @@ public final class ThemeDAO implements IThemeDAO
             daoUtil.free( );
             return themeList;
         }
+    }
+    
+    private Theme getRow( DAOUtil daoUtil )
+    {
+        int nCpt = 1;
+        Theme Theme = new Theme( );
+
+        Theme.setId( daoUtil.getInt( nCpt++ ) );
+        Theme.setCampaignCode( daoUtil.getString( nCpt++ ) );
+        Theme.setCode( daoUtil.getString( nCpt++ ) );
+        Theme.setTitle( daoUtil.getString( nCpt++ ) );
+        Theme.setDescription( daoUtil.getString( nCpt++ ) );
+        Theme.setActive( daoUtil.getBoolean( nCpt++ ) );
+        Theme.setFrontRgb( daoUtil.getString( nCpt++ ) );
+        Theme.setImageFile(daoUtil.getInt( nCpt++ ));
+        return Theme;
+    }
+
+    
+    /**
+     * {@inheritDoc }
+     */
+    @Override
+    public Collection<Theme> selectThemesListByCampaign( String campaignCode, Plugin plugin )
+    {
+        Collection<Theme> ThemeList = new ArrayList<Theme>( );
+        DAOUtil daoUtil = new DAOUtil( SQL_QUERY_SELECTALL_BY_CAMPAGNE, plugin );
+        daoUtil.setString( 1, campaignCode );
+        daoUtil.executeQuery( );
+
+        while ( daoUtil.next( ) )
+        {
+            Theme Theme = getRow( daoUtil );
+
+            ThemeList.add( Theme );
+        }
+
+        daoUtil.free( );
+        return ThemeList;
+    }
+    
+    /**
+     * {@inheritDoc }
+     */
+    @Override
+    public Map<String, List<Theme>> selectThemesMapByCampaign( Plugin plugin )
+    {
+        Map<String, List<Theme>> ThemeMap = new HashMap<String, List<Theme>>( );
+        DAOUtil daoUtil = new DAOUtil( SQL_QUERY_SELECTALL, plugin );
+        daoUtil.executeQuery( );
+
+        while ( daoUtil.next( ) )
+        {
+            Theme Theme = getRow( daoUtil );
+
+            List<Theme> ThemeList = ThemeMap.get( Theme.getCampaignCode() );
+            if ( ThemeList == null )
+            {
+                ThemeList = new ArrayList<Theme>( );
+                ThemeMap.put( Theme.getCampaignCode(), ThemeList );
+            }
+            ThemeList.add( Theme );
+        }
+
+        daoUtil.free( );
+        return ThemeMap;
+    }
+    
+    /**
+     * {@inheritDoc }
+     */
+    @Override
+    public Theme loadByCodeTheme( String codeTheme, Plugin plugin )
+    {
+        DAOUtil daoUtil = new DAOUtil( SQL_QUERY_SELECT_BY_TITLETHEME, plugin );
+        daoUtil.setString( 1, codeTheme );
+        daoUtil.executeQuery( );
+
+        Theme Theme = null;
+
+        if ( daoUtil.next( ) )
+        {
+        	Theme = getRow( daoUtil );
+        }
+
+        daoUtil.free( );
+        return Theme;
     }
 }

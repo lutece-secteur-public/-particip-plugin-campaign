@@ -36,6 +36,8 @@ package fr.paris.lutece.plugins.campaign.business;
 
 import fr.paris.lutece.portal.service.plugin.Plugin;
 import fr.paris.lutece.util.ReferenceList;
+
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -132,4 +134,15 @@ public interface IPhaseDAO
      * @return The referenceList which contains the data of all the phase objects
      */
     ReferenceList selectPhasesTypeReferenceList( Plugin plugin );
+
+    /**
+     * Load the data of all the campagnePhase objects for a campagne and returns them as a collection
+     * 
+     * @param campagneCode
+     *            the campagne code
+     * @param plugin
+     *            the Plugin
+     * @return The collection which contains the data of all the campagnePhase objects
+     */
+	Collection<Phase> selectPhasesListByCampaign(String campagneCode, Plugin _plugin);
 }

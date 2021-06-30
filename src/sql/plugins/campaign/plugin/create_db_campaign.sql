@@ -55,6 +55,7 @@ DROP TABLE IF EXISTS campaign_theme;
 CREATE TABLE campaign_theme (
 id_theme int AUTO_INCREMENT,
 campaign_code varchar(50) default '' NOT NULL,
+code_theme varchar(50) default '' NOT NULL,
 title varchar(255) default '' NOT NULL,
 description long varchar NOT NULL,
 active SMALLINT NOT NULL,

@@ -36,7 +36,10 @@ package fr.paris.lutece.plugins.campaign.business;
 
 import fr.paris.lutece.portal.service.plugin.Plugin;
 import fr.paris.lutece.util.ReferenceList;
+
+import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 /**
  * IThemeDAO Interface
@@ -113,4 +116,26 @@ public interface IThemeDAO
      * @return The referenceList which contains the data of all the theme objects
      */
     ReferenceList selectThemesReferenceList( Plugin plugin );
+    
+    /**
+     * Load the data of all the campagneTheme objects for a cmapgne and returns them as a collection
+     * 
+     * @param campagneCode
+     *            Code de la campagne courante
+     * @param plugin
+     *            the Plugin
+     * @return The collection which contains the data of all the campagneTheme objects
+     */
+	Collection<Theme> selectThemesListByCampaign(String codeCampaign, Plugin _plugin);
+
+	/**
+     * Load the data of all the campagneTheme objects mapped from cmapgne and returns them as a map
+     * 
+     * @param plugin
+     *            the Plugin
+     * @return The collection which contains the data of all the campagneTheme objects
+     */
+	Map<String, List<Theme>> selectThemesMapByCampaign(Plugin _plugin);
+
+	Theme loadByCodeTheme(String codeTheme, Plugin _plugin);
 }
