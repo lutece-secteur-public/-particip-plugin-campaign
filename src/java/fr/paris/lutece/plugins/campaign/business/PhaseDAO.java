@@ -280,24 +280,26 @@ public final class PhaseDAO implements IPhaseDAO
     public Collection<Phase> selectPhasesListByCampaign( String campaignCode, Plugin plugin )
     {
         Collection<Phase> PhaseList = new ArrayList<Phase>( );
-        DAOUtil daoUtil = new DAOUtil( SQL_QUERY_SELECTALL_BY_CAMPAIGN, plugin );
-        daoUtil.setString( 1, campaignCode );
-        daoUtil.executeQuery( );
-
-        while ( daoUtil.next( ) )
+        try ( DAOUtil daoUtil = new DAOUtil( SQL_QUERY_SELECTALL_BY_CAMPAIGN, plugin ) )
         {
-            Phase Phase = new Phase( );
+        	daoUtil.setString( 1, campaignCode );
+        	daoUtil.executeQuery( );
 
-            Phase.setId( daoUtil.getInt( 1 ) );
-            Phase.setLabel( daoUtil.getString( 2 ) );
-            Phase.setCampaignCode( daoUtil.getString( 3 ) );
-            Phase.setStartingTimeStampDate( daoUtil.getTimestamp( 4 ) );
-            Phase.setEndingTimeStampDate( daoUtil.getTimestamp( 5 ) );
+            while ( daoUtil.next( ) )
+            {
+                Phase Phase = new Phase( );
 
-            PhaseList.add( Phase );
+                Phase.setId( daoUtil.getInt( 1 ) );
+                Phase.setLabel( daoUtil.getString( 2 ) );
+                Phase.setCampaignCode( daoUtil.getString( 3 ) );
+                Phase.setStartingTimeStampDate( daoUtil.getTimestamp( 4 ) );
+                Phase.setEndingTimeStampDate( daoUtil.getTimestamp( 5 ) );
+
+                PhaseList.add( Phase );
+            }
+            daoUtil.free( );
+            return PhaseList;
         }
-
-        daoUtil.free( );
-        return PhaseList;
+        
     }
 }

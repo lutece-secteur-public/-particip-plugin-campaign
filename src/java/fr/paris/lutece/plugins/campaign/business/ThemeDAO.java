@@ -59,7 +59,7 @@ public final class ThemeDAO implements IThemeDAO
     private static final String SQL_QUERY_SELECTALL = "SELECT id_theme, campaign_code, code_theme, title, description, active, front_rgb, image_file FROM campaign_theme";
     private static final String SQL_QUERY_SELECTALL_BY_CAMPAGNE = SQL_QUERY_SELECTALL + " WHERE campaign_code = ?";
     private static final String SQL_QUERY_SELECTALL_ID = "SELECT id_theme FROM campaign_theme";
-    private static final String SQL_QUERY_SELECT_BY_TITLETHEME = "SELECT id_theme, campaign_code, code_theme, title, description, active, front_rgb, image_file FROM campaign_theme WHERE code_theme = ?";
+    private static final String SQL_QUERY_SELECT_BY_CODETHEME = "SELECT id_theme, campaign_code, code_theme, title, description, active, front_rgb, image_file FROM campaign_theme WHERE code_theme = ?";
 
     /**
      * {@inheritDoc }
@@ -100,16 +100,7 @@ public final class ThemeDAO implements IThemeDAO
 
             if ( daoUtil.next( ) )
             {
-                theme = new Theme( );
-                int nIndex = 1;
-
-                theme.setId( daoUtil.getInt( nIndex++ ) );
-                theme.setCampaignCode( daoUtil.getString( nIndex++ ) );
-                theme.setTitle( daoUtil.getString( nIndex++ ) );
-                theme.setDescription( daoUtil.getString( nIndex++ ) );
-                theme.setActive( daoUtil.getBoolean( nIndex++ ) );
-                theme.setFrontRgb( daoUtil.getString( nIndex++ ) );
-                theme.setImageFile( daoUtil.getInt( nIndex ) );
+            	theme = getRow( daoUtil );
             }
 
             daoUtil.free( );
@@ -244,19 +235,21 @@ public final class ThemeDAO implements IThemeDAO
     public Collection<Theme> selectThemesListByCampaign( String campaignCode, Plugin plugin )
     {
         Collection<Theme> ThemeList = new ArrayList<Theme>( );
-        DAOUtil daoUtil = new DAOUtil( SQL_QUERY_SELECTALL_BY_CAMPAGNE, plugin );
-        daoUtil.setString( 1, campaignCode );
-        daoUtil.executeQuery( );
-
-        while ( daoUtil.next( ) )
+        try ( DAOUtil daoUtil = new DAOUtil( SQL_QUERY_SELECTALL_BY_CAMPAGNE, plugin ) )
         {
-            Theme Theme = getRow( daoUtil );
+        	daoUtil.setString( 1, campaignCode );
+            daoUtil.executeQuery( );
 
-            ThemeList.add( Theme );
+            while ( daoUtil.next( ) )
+            {
+                Theme Theme = getRow( daoUtil );
+
+                ThemeList.add( Theme );
+            }
+
+            daoUtil.free( );
+            return ThemeList;
         }
-
-        daoUtil.free( );
-        return ThemeList;
     }
     
     /**
@@ -266,24 +259,26 @@ public final class ThemeDAO implements IThemeDAO
     public Map<String, List<Theme>> selectThemesMapByCampaign( Plugin plugin )
     {
         Map<String, List<Theme>> ThemeMap = new HashMap<String, List<Theme>>( );
-        DAOUtil daoUtil = new DAOUtil( SQL_QUERY_SELECTALL, plugin );
-        daoUtil.executeQuery( );
-
-        while ( daoUtil.next( ) )
+        try ( DAOUtil daoUtil = new DAOUtil( SQL_QUERY_SELECTALL, plugin ) )
         {
-            Theme Theme = getRow( daoUtil );
+        	daoUtil.executeQuery( );
 
-            List<Theme> ThemeList = ThemeMap.get( Theme.getCampaignCode() );
-            if ( ThemeList == null )
+            while ( daoUtil.next( ) )
             {
-                ThemeList = new ArrayList<Theme>( );
-                ThemeMap.put( Theme.getCampaignCode(), ThemeList );
-            }
-            ThemeList.add( Theme );
-        }
+                Theme Theme = getRow( daoUtil );
 
-        daoUtil.free( );
-        return ThemeMap;
+                List<Theme> ThemeList = ThemeMap.get( Theme.getCampaignCode() );
+                if ( ThemeList == null )
+                {
+                    ThemeList = new ArrayList<Theme>( );
+                    ThemeMap.put( Theme.getCampaignCode(), ThemeList );
+                }
+                ThemeList.add( Theme );
+            }
+
+            daoUtil.free( );
+            return ThemeMap;
+        }
     }
     
     /**
@@ -292,18 +287,20 @@ public final class ThemeDAO implements IThemeDAO
     @Override
     public Theme loadByCodeTheme( String codeTheme, Plugin plugin )
     {
-        DAOUtil daoUtil = new DAOUtil( SQL_QUERY_SELECT_BY_TITLETHEME, plugin );
-        daoUtil.setString( 1, codeTheme );
-        daoUtil.executeQuery( );
-
-        Theme Theme = null;
-
-        if ( daoUtil.next( ) )
+        try ( DAOUtil daoUtil = new DAOUtil( SQL_QUERY_SELECT_BY_CODETHEME, plugin ) )
         {
-        	Theme = getRow( daoUtil );
-        }
+        	daoUtil.setString( 1, codeTheme );
+            daoUtil.executeQuery( );
 
-        daoUtil.free( );
-        return Theme;
+            Theme Theme = null;
+
+            if ( daoUtil.next( ) )
+            {
+            	Theme = getRow( daoUtil );
+            }
+
+            daoUtil.free( );
+            return Theme;
+        }
     }
 }

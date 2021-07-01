@@ -118,24 +118,33 @@ public interface IThemeDAO
     ReferenceList selectThemesReferenceList( Plugin plugin );
     
     /**
-     * Load the data of all the campagneTheme objects for a cmapgne and returns them as a collection
+     * Load the data of all the Theme objects for a campaign and returns them as a collection
      * 
-     * @param campagneCode
+     * @param campaignCode
      *            Code de la campagne courante
      * @param plugin
      *            the Plugin
-     * @return The collection which contains the data of all the campagneTheme objects
+     * @return The collection which contains the data of all the Theme objects
      */
 	Collection<Theme> selectThemesListByCampaign(String codeCampaign, Plugin _plugin);
 
 	/**
-     * Load the data of all the campagneTheme objects mapped from cmapgne and returns them as a map
+     * Load the data of all the Theme objects mapped from campaign and returns them as a map
      * 
      * @param plugin
      *            the Plugin
-     * @return The collection which contains the data of all the campagneTheme objects
+     * @return The collection which contains the data of all the Theme objects
      */
 	Map<String, List<Theme>> selectThemesMapByCampaign(Plugin _plugin);
 
+	/**
+     * Load the data from the table
+     * 
+     * @param codeTheme
+     *            The identifier of the Theme
+     * @param plugin
+     *            the Plugin
+     * @return The instance of the Theme
+     */
 	Theme loadByCodeTheme(String codeTheme, Plugin _plugin);
 }
