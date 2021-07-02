@@ -43,8 +43,8 @@ import java.time.LocalDateTime;
  */
 public class PhaseBusinessTest extends LuteceTestCase
 {
-    private static final int IDCAMPAIGN1 = 1;
-    private static final int IDCAMPAIGN2 = 2;
+    private static final String CODECAMPAIGN1 = "A";
+    private static final String CODECAMPAIGN2 = "B";
     private static final LocalDateTime STARTINGDATE1 =  LocalDateTime.of(2021, 6, 16, 12, 00);
     private static final LocalDateTime STARTINGDATE2 = LocalDateTime.of(2022, 6, 16, 12, 00);
     private static final LocalDateTime ENDINGDATE1 = LocalDateTime.of(2021, 9, 16, 12, 00);
@@ -61,7 +61,7 @@ public class PhaseBusinessTest extends LuteceTestCase
     {
         // Initialize an object
         Phase phase = new Phase( );
-        phase.setIdCampaign( IDCAMPAIGN1 );
+        phase.setCampaignCode( CODECAMPAIGN1 );
         phase.setStartingDate( STARTINGDATE1 );
         phase.setEndingDate( ENDINGDATE1 );
         phase.setLabel( LABEL1 );
@@ -70,21 +70,21 @@ public class PhaseBusinessTest extends LuteceTestCase
         // Create test
         PhaseHome.create( phase );
         Phase phaseStored = PhaseHome.findByPrimaryKey( phase.getId( ) );
-        assertEquals( phaseStored.getIdCampaign( ), phase.getIdCampaign( ) );
+        assertEquals( phaseStored.getCampaignCode( ), phase.getCampaignCode( ) );
         assertEquals( phaseStored.getStartingDate( ).toString( ), phase.getStartingDate( ).toString( ) );
         assertEquals( phaseStored.getEndingDate( ).toString( ), phase.getEndingDate( ).toString( ) );
         assertEquals( phaseStored.getLabel( ), phase.getLabel( ) );
         assertEquals( phaseStored.getOrderNum( ), phase.getOrderNum( ) );
 
         // Update test
-        phase.setIdCampaign( IDCAMPAIGN2 );
+        phase.setCampaignCode( CODECAMPAIGN2 );
         phase.setStartingDate( STARTINGDATE2 );
         phase.setEndingDate( ENDINGDATE2 );
         phase.setLabel( LABEL2 );
         phase.setOrderNum( ORDERNUM2 );
         PhaseHome.update( phase );
         phaseStored = PhaseHome.findByPrimaryKey( phase.getId( ) );
-        assertEquals( phaseStored.getIdCampaign( ), phase.getIdCampaign( ) );
+        assertEquals( phaseStored.getCampaignCode( ), phase.getCampaignCode( ) );
         assertEquals( phaseStored.getStartingDate( ).toString( ), phase.getStartingDate( ).toString( ) );
         assertEquals( phaseStored.getEndingDate( ).toString( ), phase.getEndingDate( ).toString( ) );
         assertEquals( phaseStored.getLabel( ), phase.getLabel( ) );

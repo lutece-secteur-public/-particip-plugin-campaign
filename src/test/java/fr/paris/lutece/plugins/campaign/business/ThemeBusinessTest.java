@@ -40,8 +40,8 @@ import fr.paris.lutece.test.LuteceTestCase;
  */
 public class ThemeBusinessTest extends LuteceTestCase
 {
-    private static final int IDCAMPAIGN1 = 1;
-    private static final int IDCAMPAIGN2 = 2;
+    private static final String CODECAMPAIGN1 = "A";
+    private static final String CODECAMPAIGN2 = "B";
     private static final String TITLE1 = "Title1";
     private static final String TITLE2 = "Title2";
     private static final String DESCRIPTION1 = "Description1";
@@ -60,7 +60,7 @@ public class ThemeBusinessTest extends LuteceTestCase
     {
         // Initialize an object
         Theme theme = new Theme( );
-        theme.setIdCampaign( IDCAMPAIGN1 );
+        theme.setCampaignCode( CODECAMPAIGN1 );
         theme.setTitle( TITLE1 );
         theme.setDescription( DESCRIPTION1 );
         theme.setActive( ACTIVE1 );
@@ -70,7 +70,7 @@ public class ThemeBusinessTest extends LuteceTestCase
         // Create test
         ThemeHome.create( theme );
         Theme themeStored = ThemeHome.findByPrimaryKey( theme.getId( ) );
-        assertEquals( themeStored.getIdCampaign( ), theme.getIdCampaign( ) );
+        assertEquals( themeStored.getCampaignCode( ), theme.getCampaignCode( ) );
         assertEquals( themeStored.getTitle( ), theme.getTitle( ) );
         assertEquals( themeStored.getDescription( ), theme.getDescription( ) );
         assertEquals( themeStored.getActive( ), theme.getActive( ) );
@@ -78,7 +78,7 @@ public class ThemeBusinessTest extends LuteceTestCase
         assertEquals( themeStored.getImageFile( ), theme.getImageFile( ) );
 
         // Update test
-        theme.setIdCampaign( IDCAMPAIGN2 );
+        theme.setCampaignCode( CODECAMPAIGN2 );
         theme.setTitle( TITLE2 );
         theme.setDescription( DESCRIPTION2 );
         theme.setActive( ACTIVE2 );
@@ -86,7 +86,7 @@ public class ThemeBusinessTest extends LuteceTestCase
         theme.setImageFile( IMAGEFILE2 );
         ThemeHome.update( theme );
         themeStored = ThemeHome.findByPrimaryKey( theme.getId( ) );
-        assertEquals( themeStored.getIdCampaign( ), theme.getIdCampaign( ) );
+        assertEquals( themeStored.getCampaignCode( ), theme.getCampaignCode( ) );
         assertEquals( themeStored.getTitle( ), theme.getTitle( ) );
         assertEquals( themeStored.getDescription( ), theme.getDescription( ) );
         assertEquals( themeStored.getActive( ), theme.getActive( ) );

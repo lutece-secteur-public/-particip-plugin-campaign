@@ -40,8 +40,8 @@ import fr.paris.lutece.test.LuteceTestCase;
  */
 public class AreaBusinessTest extends LuteceTestCase
 {
-    private static final int IDCAMPAIGN1 = 1;
-    private static final int IDCAMPAIGN2 = 2;
+    private static final String CODECAMPAIGN1 = "A";
+    private static final String CODECAMPAIGN2 = "B";
     private static final String TITLE1 = "Title1";
     private static final String TITLE2 = "Title2";
     private static final String TYPE1 = "Type1";
@@ -58,7 +58,7 @@ public class AreaBusinessTest extends LuteceTestCase
     {
         // Initialize an object
         Area area = new Area( );
-        area.setIdCampaign( IDCAMPAIGN1 );
+        area.setCampaignCode( CODECAMPAIGN1 );
         area.setTitle( TITLE1 );
         area.setType( TYPE1 );
         area.setNumberVotes( NUMBERVOTES1 );
@@ -67,21 +67,21 @@ public class AreaBusinessTest extends LuteceTestCase
         // Create test
         AreaHome.create( area );
         Area areaStored = AreaHome.findByPrimaryKey( area.getId( ) );
-        assertEquals( areaStored.getIdCampaign( ), area.getIdCampaign( ) );
+        assertEquals( areaStored.getCampaignCode( ), area.getCampaignCode( ) );
         assertEquals( areaStored.getTitle( ), area.getTitle( ) );
         assertEquals( areaStored.getType( ), area.getType( ) );
         assertEquals( areaStored.getNumberVotes( ), area.getNumberVotes( ) );
         assertEquals( areaStored.getActive( ), area.getActive( ) );
 
         // Update test
-        area.setIdCampaign( IDCAMPAIGN2 );
+        area.setCampaignCode( CODECAMPAIGN2 );
         area.setTitle( TITLE2 );
         area.setType( TYPE2 );
         area.setNumberVotes( NUMBERVOTES2 );
         area.setActive( ACTIVE2 );
         AreaHome.update( area );
         areaStored = AreaHome.findByPrimaryKey( area.getId( ) );
-        assertEquals( areaStored.getIdCampaign( ), area.getIdCampaign( ) );
+        assertEquals( areaStored.getCampaignCode( ), area.getCampaignCode( ) );
         assertEquals( areaStored.getTitle( ), area.getTitle( ) );
         assertEquals( areaStored.getType( ), area.getType( ) );
         assertEquals( areaStored.getNumberVotes( ), area.getNumberVotes( ) );
