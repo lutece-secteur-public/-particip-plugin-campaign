@@ -56,7 +56,7 @@ public class CampaignBusinessTest extends LuteceTestCase
     {
         // Initialize an object
         Campaign campaign = new Campaign( );
-        campaign.setCodeCampaign( CODECAMPAIGN1 );
+        campaign.setCampaignCode( CODECAMPAIGN1 );
         campaign.setTitle( TITLE1 );
         campaign.setDescription( DESCRIPTION1 );
         campaign.setActive( ACTIVE1 );
@@ -64,19 +64,19 @@ public class CampaignBusinessTest extends LuteceTestCase
         // Create test
         CampaignHome.create( campaign );
         Campaign campaignStored = CampaignHome.findByPrimaryKey( campaign.getId( ) );
-        assertEquals( campaignStored.getCodeCampaign( ), campaign.getCodeCampaign( ) );
+        assertEquals( campaignStored.getCampaignCode( ), campaign.getCampaignCode( ) );
         assertEquals( campaignStored.getTitle( ), campaign.getTitle( ) );
         assertEquals( campaignStored.getDescription( ), campaign.getDescription( ) );
         assertEquals( campaignStored.getActive( ), campaign.getActive( ) );
 
         // Update test
-        campaign.setCodeCampaign( CODECAMPAIGN2 );
+        campaign.setCampaignCode( CODECAMPAIGN2 );
         campaign.setTitle( TITLE2 );
         campaign.setDescription( DESCRIPTION2 );
         campaign.setActive( ACTIVE2 );
         CampaignHome.update( campaign );
         campaignStored = CampaignHome.findByPrimaryKey( campaign.getId( ) );
-        assertEquals( campaignStored.getCodeCampaign( ), campaign.getCodeCampaign( ) );
+        assertEquals( campaignStored.getCampaignCode( ), campaign.getCampaignCode( ) );
         assertEquals( campaignStored.getTitle( ), campaign.getTitle( ) );
         assertEquals( campaignStored.getDescription( ), campaign.getDescription( ) );
         assertEquals( campaignStored.getActive( ), campaign.getActive( ) );
