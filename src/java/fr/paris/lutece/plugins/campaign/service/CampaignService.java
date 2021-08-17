@@ -1,6 +1,8 @@
 package fr.paris.lutece.plugins.campaign.service;
 
 import java.sql.Timestamp;
+import java.text.Normalizer;
+import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
@@ -150,6 +152,50 @@ public class CampaignService implements ICampaignService{
 	public Campaign getLastCampaign( )
     {
         return CampaignHome.findByPrimaryKey( AppPropertiesService.getPropertyInt( LAST_CAMPAIGN_ID, -1 ) );
+    }
+	
+	public Timestamp start( String campain, String phase )
+    {
+        Timestamp timeStamp = getTimestamp( campain, phase, "BEGINNING_DATETIME" );
+        return timeStamp;
+    }
+	
+	public String startStr( String campain, String phase, String format, boolean withAccents )
+    {
+        Timestamp ts = start( campain, phase );
+        Date date = new Date( );
+        date.setTime( ts.getTime( ) );
+        String formattedDate = new SimpleDateFormat( format ).format( date );
+        return toSoLovelyString( formattedDate, withAccents );
+    }
+	
+	private String toSoLovelyString( String msg, boolean withAccents )
+    {
+        String soLovelyStr = null;
+
+        // Deleting accents
+        if ( !withAccents )
+        {
+            soLovelyStr = Normalizer.normalize( msg, Normalizer.Form.NFD ).replaceAll( "\\p{InCombiningDiacriticalMarks}+", "" );
+        }
+        else
+        {
+            soLovelyStr = msg;
+        }
+
+        // Replacing "01" by "1er"
+        if ( soLovelyStr.startsWith( "01" ) )
+        {
+            soLovelyStr = "1er " + soLovelyStr.substring( 3 );
+        }
+
+        // Deleting "0" if first char
+        if ( soLovelyStr.charAt( 0 ) == '0' )
+        {
+            soLovelyStr = soLovelyStr.substring( 1 );
+        }
+
+        return soLovelyStr;
     }
 
 }
