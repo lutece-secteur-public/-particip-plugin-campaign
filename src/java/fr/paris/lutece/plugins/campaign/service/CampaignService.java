@@ -169,6 +169,11 @@ public class CampaignService implements ICampaignService{
         return toSoLovelyString( formattedDate, withAccents );
     }
 	
+	public String startStr( String phase, String format, boolean withAccents )
+    {
+        return startStr( getLastCampaign( ).getCampaignCode(), phase, format, withAccents );
+    }
+	
 	private String toSoLovelyString( String msg, boolean withAccents )
     {
         String soLovelyStr = null;
