@@ -36,6 +36,7 @@ package fr.paris.lutece.plugins.campaign.service;
 import java.sql.Timestamp;
 
 import fr.paris.lutece.plugins.campaign.business.Campaign;
+import fr.paris.lutece.util.ReferenceList;
 
 /**
  *
@@ -136,5 +137,12 @@ public interface ICampaignService
      */
     // Resets the internal cache of phases
     public void reset( );
+    /**
+     * Load the data of all the campaign objects and returns them as a referenceList
+     * 
+     * @return the referenceList which contains the data of all the campaign objects
+     */
+	public ReferenceList getCampaignsReferenceList( );
+
 
 }

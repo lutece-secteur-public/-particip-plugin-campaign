@@ -128,12 +128,13 @@ public final class AreaHome
     }
 
     /**
-     * Load the data of all the area objects and returns them as a referenceList
+     * Load the data of the area objects by campaign code and returns them as a referenceList
      * 
+     * @param campaignCode the campaign code
      * @return the referenceList which contains the data of all the area objects
      */
-    public static ReferenceList getAreasReferenceList( )
+    public static ReferenceList getAreasReferenceList( String campaignCode )
     {
-        return _dao.selectAreasReferenceList( _plugin );
+        return _dao.selectAreasReferenceList( campaignCode, _plugin );
     }
 }

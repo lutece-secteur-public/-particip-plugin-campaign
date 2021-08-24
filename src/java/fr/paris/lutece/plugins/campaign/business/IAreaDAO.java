@@ -112,5 +112,5 @@ public interface IAreaDAO
      *            the Plugin
      * @return The referenceList which contains the data of all the area objects
      */
-    ReferenceList selectAreasReferenceList( Plugin plugin );
+    ReferenceList selectAreasReferenceList( String campaignCode ,Plugin plugin );
 }
