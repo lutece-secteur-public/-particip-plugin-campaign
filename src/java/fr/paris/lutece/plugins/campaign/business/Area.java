@@ -46,7 +46,9 @@ public class Area implements Serializable
 
     // Variables declarations
     private int _nId;
-
+    private String _strAreaCode;
+    @NotEmpty( message = "#i18n{campaign.validation.area.Code.notEmpty}" )
+    @Size( max = 50, message = "#i18n{campaign.validation.area.Code.size}" )
     private String _strCampaignCode;
     @NotEmpty( message = "#i18n{campaign.validation.area.Title.notEmpty}" )
     @Size( max = 255, message = "#i18n{campaign.validation.area.Title.size}" )
@@ -59,6 +61,24 @@ public class Area implements Serializable
 
     private boolean _bActive;
 
+    
+    /**
+     * Returns the AreaCode
+     * @return The AreaCode
+     */ 
+     public String getAreaCode()
+     {
+         return _strAreaCode;
+     }
+ 
+    /**
+     * Sets the AreaCode
+     * @param strAreaCode The AreaCode
+     */ 
+     public void setAreaCode( String strAreaCode )
+     {
+         _strAreaCode = strAreaCode;
+     }
     /**
      * Returns the Id
      * 

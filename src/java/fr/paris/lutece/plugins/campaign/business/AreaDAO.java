@@ -48,12 +48,14 @@ import java.util.List;
 public final class AreaDAO implements IAreaDAO
 {
     // Constants
-    private static final String SQL_QUERY_SELECT = "SELECT id_area, campaign_code, title, type, number_votes, active FROM campaign_area WHERE id_area = ?";
-    private static final String SQL_QUERY_INSERT = "INSERT INTO campaign_area ( campaign_code, title, type, number_votes, active ) VALUES ( ?, ?, ?, ?, ? ) ";
+    private static final String SQL_QUERY_SELECT = "SELECT id_area, area_code, campaign_code, title, type, number_votes, active FROM campaign_area WHERE id_area = ?";
+    private static final String SQL_QUERY_INSERT = "INSERT INTO campaign_area ( area_code, campaign_code, title, type, number_votes, active ) VALUES ( ?, ?, ?, ?, ?, ? ) ";
     private static final String SQL_QUERY_DELETE = "DELETE FROM campaign_area WHERE id_area = ? ";
-    private static final String SQL_QUERY_UPDATE = "UPDATE campaign_area SET id_area = ?, campaign_code = ?, title = ?, type = ?, number_votes = ?, active = ? WHERE id_area = ?";
-    private static final String SQL_QUERY_SELECTALL = "SELECT id_area, campaign_code, title, type, number_votes, active FROM campaign_area";
+    private static final String SQL_QUERY_UPDATE = "UPDATE campaign_area SET id_area = ?, area_code= ?, campaign_code = ?, title = ?, type = ?, number_votes = ?, active = ? WHERE id_area = ?";
+    private static final String SQL_QUERY_SELECTALL = "SELECT id_area, area_code, campaign_code, title, type, number_votes, active FROM campaign_area";
     private static final String SQL_QUERY_SELECTALL_ID = "SELECT id_area FROM campaign_area";
+    private static final String SQL_QUERY_SELECT_REF_BY_CAMPAIGN = "SELECT area_code, title FROM campaign_area where campaign_code = ? ";
+
 
     /**
      * {@inheritDoc }
@@ -64,6 +66,7 @@ public final class AreaDAO implements IAreaDAO
         try ( DAOUtil daoUtil = new DAOUtil( SQL_QUERY_INSERT, Statement.RETURN_GENERATED_KEYS, plugin ) )
         {
             int nIndex = 1;
+            daoUtil.setString( nIndex++, area.getAreaCode( ) );
             daoUtil.setString( nIndex++, area.getCampaignCode( ) );
             daoUtil.setString( nIndex++, area.getTitle( ) );
             daoUtil.setString( nIndex++, area.getType( ) );
@@ -97,6 +100,7 @@ public final class AreaDAO implements IAreaDAO
                 int nIndex = 1;
 
                 area.setId( daoUtil.getInt( nIndex++ ) );
+                area.setAreaCode( daoUtil.getString( nIndex++ ) );
                 area.setCampaignCode( daoUtil.getString( nIndex++ ) );
                 area.setTitle( daoUtil.getString( nIndex++ ) );
                 area.setType( daoUtil.getString( nIndex++ ) );
@@ -104,7 +108,6 @@ public final class AreaDAO implements IAreaDAO
                 area.setActive( daoUtil.getBoolean( nIndex ) );
             }
 
-            daoUtil.free( );
             return area;
         }
     }
@@ -119,7 +122,6 @@ public final class AreaDAO implements IAreaDAO
         {
             daoUtil.setInt( 1, nKey );
             daoUtil.executeUpdate( );
-            daoUtil.free( );
         }
     }
 
@@ -134,6 +136,7 @@ public final class AreaDAO implements IAreaDAO
             int nIndex = 1;
 
             daoUtil.setInt( nIndex++, area.getId( ) );
+            daoUtil.setString( nIndex++, area.getAreaCode( ) );
             daoUtil.setString( nIndex++, area.getCampaignCode( ) );
             daoUtil.setString( nIndex++, area.getTitle( ) );
             daoUtil.setString( nIndex++, area.getType( ) );
@@ -163,6 +166,7 @@ public final class AreaDAO implements IAreaDAO
                 int nIndex = 1;
 
                 area.setId( daoUtil.getInt( nIndex++ ) );
+                area.setAreaCode( daoUtil.getString( nIndex++ ) );
                 area.setCampaignCode( daoUtil.getString( nIndex++ ) );
                 area.setTitle( daoUtil.getString( nIndex++ ) );
                 area.setType( daoUtil.getString( nIndex++ ) );
@@ -202,19 +206,18 @@ public final class AreaDAO implements IAreaDAO
      * {@inheritDoc }
      */
     @Override
-    public ReferenceList selectAreasReferenceList( Plugin plugin )
+    public ReferenceList selectAreasReferenceList( String campaignCode, Plugin plugin )
     {
         ReferenceList areaList = new ReferenceList( );
-        try ( DAOUtil daoUtil = new DAOUtil( SQL_QUERY_SELECTALL, plugin ) )
+        try ( DAOUtil daoUtil = new DAOUtil( SQL_QUERY_SELECT_REF_BY_CAMPAIGN, plugin ) )
         {
+            daoUtil.setString( 1, campaignCode );
             daoUtil.executeQuery( );
 
             while ( daoUtil.next( ) )
             {
                 areaList.addItem( daoUtil.getInt( 1 ), daoUtil.getString( 2 ) );
             }
-
-            daoUtil.free( );
             return areaList;
         }
     }

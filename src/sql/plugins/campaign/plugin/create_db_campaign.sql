@@ -73,12 +73,14 @@ CONSTRAINT fk_campaign_phase_theme
 DROP TABLE IF EXISTS campaign_area;
 CREATE TABLE campaign_area (
 id_area int AUTO_INCREMENT,
+area_code varchar(50) NOT NULL,
 campaign_code varchar(50) default '' NOT NULL,
 title varchar(255) default '' NOT NULL,
 type varchar(50) default '',
-number_votes int default '0' NOT NULL,
+number_votes int default 0 NOT NULL,
 active SMALLINT NOT NULL,
 PRIMARY KEY (id_area),
+UNIQUE INDEX ( area_code, campaign_code ),
 CONSTRAINT fk_campaign_phase_area
     FOREIGN KEY (campaign_code)
     REFERENCES campaign_campaign (campaign_code)

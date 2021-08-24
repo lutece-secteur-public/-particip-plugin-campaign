@@ -10,9 +10,9 @@ import fr.paris.lutece.plugins.campaign.business.Phase;
 import fr.paris.lutece.plugins.campaign.business.PhaseHome;
 import fr.paris.lutece.plugins.campaign.business.Campaign;
 import fr.paris.lutece.plugins.campaign.business.CampaignHome;
-import fr.paris.lutece.portal.service.spring.SpringContextService;
 import fr.paris.lutece.portal.service.util.AppLogService;
 import fr.paris.lutece.portal.service.util.AppPropertiesService;
+import fr.paris.lutece.util.ReferenceList;
 
 public class CampaignService implements ICampaignService{
 	private Map<String, Timestamp> _cache = null;
@@ -152,4 +152,8 @@ public class CampaignService implements ICampaignService{
         return CampaignHome.findByPrimaryKey( AppPropertiesService.getPropertyInt( LAST_CAMPAIGN_ID, -1 ) );
     }
 
+	public ReferenceList getCampaignsReferenceList( )
+    {
+        return CampaignHome.getCampaignsReferenceList( ) ;
+    }
 }
