@@ -55,7 +55,11 @@ import fr.paris.lutece.plugins.campaign.business.CampaignHome;
 @Controller( controllerJsp = "ManageCampaigns.jsp", controllerPath = "jsp/admin/plugins/campaign/", right = "CAMPAIGN_MANAGEMENT" )
 public class CampaignJspBean extends AbstractManageCampaignsJspBean
 {
-    // Templates
+	/**
+	 * serialVersionUID
+	 */
+	private static final long serialVersionUID = 2485209123338980294L;
+	// Templates
     private static final String TEMPLATE_MANAGE_CAMPAIGNS = "/admin/plugins/campaign/manage_campaigns.html";
     private static final String TEMPLATE_CREATE_CAMPAIGN = "/admin/plugins/campaign/create_campaign.html";
     private static final String TEMPLATE_MODIFY_CAMPAIGN = "/admin/plugins/campaign/modify_campaign.html";

@@ -35,7 +35,6 @@
 package fr.paris.lutece.plugins.campaign.business;
 
 import fr.paris.lutece.portal.service.plugin.Plugin;
-import fr.paris.lutece.portal.business.file.FileHome;
 import fr.paris.lutece.util.ReferenceList;
 import fr.paris.lutece.util.sql.DAOUtil;
 import java.sql.Statement;
@@ -287,15 +286,14 @@ public final class ThemeDAO implements IThemeDAO
         	daoUtil.setString( 1, codeTheme );
             daoUtil.executeQuery( );
 
-            Theme Theme = null;
+            Theme theme = null;
 
             if ( daoUtil.next( ) )
             {
-            	Theme = getRow( daoUtil );
+            	theme = getRow( daoUtil );
             }
 
-            daoUtil.free( );
-            return Theme;
+            return theme;
         }
     }
 }

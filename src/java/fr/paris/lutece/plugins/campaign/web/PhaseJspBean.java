@@ -60,7 +60,11 @@ import fr.paris.lutece.plugins.campaign.service.Utils;
 @Controller( controllerJsp = "ManagePhases.jsp", controllerPath = "jsp/admin/plugins/campaign/", right = "CAMPAIGN_MANAGEMENT" )
 public class PhaseJspBean extends AbstractManageCampaignsJspBean
 {
-    // Templates
+    /**
+	 * serialVersionUID
+	 */
+	private static final long serialVersionUID = 4443969792657721464L;
+	// Templates
     private static final String TEMPLATE_MANAGE_PHASES = "/admin/plugins/campaign/manage_phases.html";
     private static final String TEMPLATE_CREATE_PHASE = "/admin/plugins/campaign/create_phase.html";
     private static final String TEMPLATE_MODIFY_PHASE = "/admin/plugins/campaign/modify_phase.html";

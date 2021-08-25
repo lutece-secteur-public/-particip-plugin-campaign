@@ -57,7 +57,11 @@ import fr.paris.lutece.plugins.campaign.business.ThemeHome;
 @Controller( controllerJsp = "ManageThemes.jsp", controllerPath = "jsp/admin/plugins/campaign/", right = "CAMPAIGN_MANAGEMENT" )
 public class ThemeJspBean extends AbstractManageCampaignsJspBean
 {
-    // Templates
+    /**
+	 * serialVersionUID
+	 */
+	private static final long serialVersionUID = 6454969911015792525L;
+	// Templates
     private static final String TEMPLATE_MANAGE_THEMES = "/admin/plugins/campaign/manage_themes.html";
     private static final String TEMPLATE_CREATE_THEME = "/admin/plugins/campaign/create_theme.html";
     private static final String TEMPLATE_MODIFY_THEME = "/admin/plugins/campaign/modify_theme.html";

@@ -279,7 +279,7 @@ public final class PhaseDAO implements IPhaseDAO
     @Override
     public Collection<Phase> selectPhasesListByCampaign( String campaignCode, Plugin plugin )
     {
-        Collection<Phase> PhaseList = new ArrayList<Phase>( );
+        Collection<Phase> phaseList = new ArrayList< >( );
         try ( DAOUtil daoUtil = new DAOUtil( SQL_QUERY_SELECTALL_BY_CAMPAIGN, plugin ) )
         {
         	daoUtil.setString( 1, campaignCode );
@@ -287,18 +287,17 @@ public final class PhaseDAO implements IPhaseDAO
 
             while ( daoUtil.next( ) )
             {
-                Phase Phase = new Phase( );
+                Phase phase = new Phase( );
 
-                Phase.setId( daoUtil.getInt( 1 ) );
-                Phase.setLabel( daoUtil.getString( 2 ) );
-                Phase.setCampaignCode( daoUtil.getString( 3 ) );
-                Phase.setStartingTimeStampDate( daoUtil.getTimestamp( 4 ) );
-                Phase.setEndingTimeStampDate( daoUtil.getTimestamp( 5 ) );
+                phase.setId( daoUtil.getInt( 1 ) );
+                phase.setLabel( daoUtil.getString( 2 ) );
+                phase.setCampaignCode( daoUtil.getString( 3 ) );
+                phase.setStartingTimeStampDate( daoUtil.getTimestamp( 4 ) );
+                phase.setEndingTimeStampDate( daoUtil.getTimestamp( 5 ) );
 
-                PhaseList.add( Phase );
+                phaseList.add( phase );
             }
-            daoUtil.free( );
-            return PhaseList;
+            return phaseList;
         }
         
     }
