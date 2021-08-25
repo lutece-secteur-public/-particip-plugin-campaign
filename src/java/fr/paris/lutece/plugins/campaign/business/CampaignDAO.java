@@ -55,6 +55,8 @@ public final class CampaignDAO implements ICampaignDAO
     private static final String SQL_QUERY_SELECTALL = "SELECT id_campaign, campaign_code, title, description, active FROM campaign_campaign";
     private static final String SQL_QUERY_SELECTALL_ID = "SELECT id_campaign FROM campaign_campaign";
     private static final String SQL_QUERY_SELECTALL_REF = "SELECT campaign_code, title FROM campaign_campaign";
+    private static final String SQL_QUERY_SELECT_BY_CODE = SQL_QUERY_SELECTALL + " WHERE campaign_code = ? ";
+
 
     /**
      * {@inheritDoc }
@@ -107,6 +109,33 @@ public final class CampaignDAO implements ICampaignDAO
         }
     }
 
+    /**
+     * {@inheritDoc }
+     */
+    @Override
+    public Campaign loadByCampaignCode( String campaignCode , Plugin plugin )
+    {
+        try ( DAOUtil daoUtil = new DAOUtil( SQL_QUERY_SELECT_BY_CODE, plugin ) )
+        {
+            daoUtil.setString( 1, campaignCode );
+            daoUtil.executeQuery( );
+            Campaign campaign = null;
+
+            if ( daoUtil.next( ) )
+            {
+                campaign = new Campaign( );
+                int nIndex = 1;
+
+                campaign.setId( daoUtil.getInt( nIndex++ ) );
+                campaign.setCampaignCode( daoUtil.getString( nIndex++ ) );
+                campaign.setTitle( daoUtil.getString( nIndex++ ) );
+                campaign.setDescription( daoUtil.getString( nIndex++ ) );
+                campaign.setActive( daoUtil.getBoolean( nIndex ) );
+            }
+
+            return campaign;
+        }
+    }
     /**
      * {@inheritDoc }
      */

@@ -86,6 +86,16 @@ public interface ICampaignDAO
      * @return The instance of the campaign
      */
     Campaign load( int nKey, Plugin plugin );
+    /**
+     * Load the data from the table
+     * 
+     * @param campaignCode
+     *            The code of the campaign
+     * @param plugin
+     *            the Plugin
+     * @return The instance of the campaign
+     */
+    Campaign loadByCampaignCode( String campaignCode , Plugin plugin );
 
     /**
      * Load the data of all the campaign objects and returns them as a list

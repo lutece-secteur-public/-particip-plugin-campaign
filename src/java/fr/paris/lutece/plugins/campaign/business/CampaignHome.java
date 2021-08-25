@@ -106,6 +106,17 @@ public final class CampaignHome
     {
         return _dao.load( nKey, _plugin );
     }
+    /**
+     * Returns an instance of a campaign whose code is specified in parameter
+     * 
+     * @param strCampaignCode
+     *            The campaign code
+     * @return an instance of Campaign
+     */
+    public static Campaign findByCampaignCode( String strCampaignCode )
+    {
+        return _dao.loadByCampaignCode( strCampaignCode, _plugin );
+    }
 
     /**
      * Load the data of all the campaign objects and returns them as a list

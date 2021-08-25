@@ -10,7 +10,7 @@
 			<input type="hidden" value="${token}" name="token" />
 			
 			<@formGroup labelFor='campaign_code' labelKey='#i18n{campaign.modify_campaign.labelCodeCampaign}' mandatory=true>
-          		<@input type='text' id='campaign_code' name='campaign_code'  maxlength=50 value='${campaign.campaignCode!\'\'}' tabIndex='0' />
+          		<@input type='text' id='campaign_code' name='campaign_code'  maxlength=50 value='${campaign.campaignCode!\'\'}' tabIndex='0' readonly=true />
 			</@formGroup>
 			<@formGroup labelFor='title' labelKey='#i18n{campaign.modify_campaign.labelTitle}' mandatory=true>
           		<@input type='text' id='title' name='title'  maxlength=255 value='${campaign.title!\'\'}' tabIndex='1' />

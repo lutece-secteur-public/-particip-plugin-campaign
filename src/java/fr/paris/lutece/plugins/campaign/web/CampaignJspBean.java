@@ -99,6 +99,8 @@ public class CampaignJspBean extends AbstractManageCampaignsJspBean
     private static final String INFO_CAMPAIGN_CREATED = "campaign.info.campaign.created";
     private static final String INFO_CAMPAIGN_UPDATED = "campaign.info.campaign.updated";
     private static final String INFO_CAMPAIGN_REMOVED = "campaign.info.campaign.removed";
+    
+    private static final String ERROR_CAMPAIGN_CODE_ALREADY_USED = "campaign.error.campaign_code.already.used";
 
     // Session variable to store working values
     private Campaign _campaign;
@@ -162,7 +164,11 @@ public class CampaignJspBean extends AbstractManageCampaignsJspBean
         {
             return redirectView( request, VIEW_CREATE_CAMPAIGN );
         }
-
+        if( CampaignHome.findByCampaignCode(_campaign.getCampaignCode( ) ) != null ) {
+        	
+            addError( ERROR_CAMPAIGN_CODE_ALREADY_USED, getLocale( ) );
+        	return redirectView( request, VIEW_CREATE_CAMPAIGN );
+        }
         CampaignHome.create( _campaign );
         addInfo( INFO_CAMPAIGN_CREATED, getLocale( ) );
 
