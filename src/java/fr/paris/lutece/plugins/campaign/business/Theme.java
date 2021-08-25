@@ -224,7 +224,8 @@ public class Theme implements Serializable
      * @param strCode
      *            the Code to set
      */
-	public void setCode(String strCode_theme) {
-		this._strCode = strCode_theme;
+	public void setCode( String strCodeTheme ) {
+		
+		this._strCode = strCodeTheme;
 	}
 }

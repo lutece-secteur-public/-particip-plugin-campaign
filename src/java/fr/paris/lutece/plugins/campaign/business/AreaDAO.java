@@ -145,7 +145,6 @@ public final class AreaDAO implements IAreaDAO
             daoUtil.setInt( nIndex, area.getId( ) );
 
             daoUtil.executeUpdate( );
-            daoUtil.free( );
         }
     }
 
@@ -176,7 +175,6 @@ public final class AreaDAO implements IAreaDAO
                 areaList.add( area );
             }
 
-            daoUtil.free( );
             return areaList;
         }
     }
@@ -197,7 +195,6 @@ public final class AreaDAO implements IAreaDAO
                 areaList.add( daoUtil.getInt( 1 ) );
             }
 
-            daoUtil.free( );
             return areaList;
         }
     }
