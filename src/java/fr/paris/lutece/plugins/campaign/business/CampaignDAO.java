@@ -57,7 +57,6 @@ public final class CampaignDAO implements ICampaignDAO
     private static final String SQL_QUERY_SELECTALL_REF = "SELECT campaign_code, title FROM campaign_campaign";
     private static final String SQL_QUERY_SELECT_BY_CODE = SQL_QUERY_SELECTALL + " WHERE campaign_code = ? ";
 
-
     /**
      * {@inheritDoc }
      */
@@ -113,7 +112,7 @@ public final class CampaignDAO implements ICampaignDAO
      * {@inheritDoc }
      */
     @Override
-    public Campaign loadByCampaignCode( String campaignCode , Plugin plugin )
+    public Campaign loadByCampaignCode( String campaignCode, Plugin plugin )
     {
         try ( DAOUtil daoUtil = new DAOUtil( SQL_QUERY_SELECT_BY_CODE, plugin ) )
         {
@@ -136,6 +135,7 @@ public final class CampaignDAO implements ICampaignDAO
             return campaign;
         }
     }
+
     /**
      * {@inheritDoc }
      */
@@ -238,5 +238,5 @@ public final class CampaignDAO implements ICampaignDAO
             return campaignList;
         }
     }
-    
+
 }

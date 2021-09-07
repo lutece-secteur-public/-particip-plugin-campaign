@@ -106,6 +106,7 @@ public final class CampaignHome
     {
         return _dao.load( nKey, _plugin );
     }
+
     /**
      * Returns an instance of a campaign whose code is specified in parameter
      * 

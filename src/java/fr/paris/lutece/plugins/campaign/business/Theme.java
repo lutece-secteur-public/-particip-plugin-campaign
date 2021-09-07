@@ -64,7 +64,7 @@ public class Theme implements Serializable
 
     @NotEmpty( message = "#i18n{campaign.validation.theme.Code.notEmpty}" )
     @Size( max = 50, message = "#i18n{campaign.validation.theme.Code.size}" )
-	private String _strCode;
+    private String _strCode;
 
     /**
      * Returns the Id
@@ -105,8 +105,9 @@ public class Theme implements Serializable
      */
     public void setCampaignCode( String strCampaignCode )
     {
-    	_strCampaignCode = strCampaignCode;
+        _strCampaignCode = strCampaignCode;
     }
+
     /**
      * Returns the Title
      * 
@@ -211,7 +212,7 @@ public class Theme implements Serializable
     {
         _nImageFile = nImageFile;
     }
-    
+
     /**
      * @return the Code
      */
@@ -224,8 +225,9 @@ public class Theme implements Serializable
      * @param strCode
      *            the Code to set
      */
-	public void setCode( String strCodeTheme ) {
-		
-		this._strCode = strCodeTheme;
-	}
+    public void setCode( String strCodeTheme )
+    {
+
+        this._strCode = strCodeTheme;
+    }
 }

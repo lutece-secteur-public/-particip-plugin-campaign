@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2020, City of Paris
+ * Copyright (c) 2002-2021, City of Paris
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -32,6 +32,7 @@
  * License 1.0
  */
 package fr.paris.lutece.plugins.campaign.service;
+
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -39,10 +40,11 @@ import java.util.Map;
 import fr.paris.lutece.plugins.campaign.business.Theme;
 import fr.paris.lutece.plugins.campaign.business.ThemeHome;
 
-public class CampaignThemeService implements ICampaignThemeService {
-	// SINGLETON
+public class CampaignThemeService implements ICampaignThemeService
+{
+    // SINGLETON
     private static ICampaignThemeService _singleton;
-    
+
     /**
      * @return CampagneService singleton
      */
@@ -50,23 +52,23 @@ public class CampaignThemeService implements ICampaignThemeService {
     {
         if ( _singleton == null )
         {
-            _singleton = new CampaignThemeService( ) ;
+            _singleton = new CampaignThemeService( );
         }
         return _singleton;
     }
-    
+
     @Override
     public Collection<Theme> getThemesListByCampaign( String codeCampaign )
     {
         return ThemeHome.getThemesListByCampaign( codeCampaign );
     }
-    
+
     @Override
     public Map<String, List<Theme>> getThemesMapByCampaign( )
     {
         return ThemeHome.getThemesMapByCampaign( );
     }
-    
+
     @Override
     public Theme findByCodeTheme( String codeTheme )
     {

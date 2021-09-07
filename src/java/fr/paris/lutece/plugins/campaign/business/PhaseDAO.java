@@ -59,8 +59,6 @@ public final class PhaseDAO implements IPhaseDAO
     private static final String SQL_QUERY_SELECT_BY_CAMPAIGN_AND_CODE_PHASE = "SELECT id_phase, campaign_code, starting_date, ending_date, label, order_num, phase_type_code FROM campaign_phase WHERE campaign_code = ? and phase_type_code = ? ";
     private static final String SQL_QUERY_SELECTALL_BY_CAMPAIGN = SQL_QUERY_SELECTALL + " WHERE campaign_code = ?";
 
-
-
     /**
      * {@inheritDoc }
      */
@@ -147,6 +145,7 @@ public final class PhaseDAO implements IPhaseDAO
             return phase;
         }
     }
+
     /**
      * {@inheritDoc }
      */
@@ -253,10 +252,11 @@ public final class PhaseDAO implements IPhaseDAO
             return phaseList;
         }
     }
+
     /**
      * {@inheritDoc }
      */
-   @Override
+    @Override
     public ReferenceList selectPhasesTypeReferenceList( Plugin plugin )
     {
         ReferenceList phaseList = new ReferenceList( );
@@ -272,18 +272,18 @@ public final class PhaseDAO implements IPhaseDAO
             return phaseList;
         }
     }
-    
+
     /**
      * {@inheritDoc }
      */
     @Override
     public Collection<Phase> selectPhasesListByCampaign( String campaignCode, Plugin plugin )
     {
-        Collection<Phase> phaseList = new ArrayList< >( );
+        Collection<Phase> phaseList = new ArrayList<>( );
         try ( DAOUtil daoUtil = new DAOUtil( SQL_QUERY_SELECTALL_BY_CAMPAIGN, plugin ) )
         {
-        	daoUtil.setString( 1, campaignCode );
-        	daoUtil.executeQuery( );
+            daoUtil.setString( 1, campaignCode );
+            daoUtil.executeQuery( );
 
             while ( daoUtil.next( ) )
             {
@@ -299,6 +299,6 @@ public final class PhaseDAO implements IPhaseDAO
             }
             return phaseList;
         }
-        
+
     }
 }

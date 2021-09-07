@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2020, City of Paris
+ * Copyright (c) 2002-2021, City of Paris
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -62,12 +62,12 @@ public interface ICampaignService
      * @return Data
      */
     public boolean isDuring( String phase );
-    
+
     /**
      * @return Data
      */
     public Campaign getLastCampaign( );
-    
+
     /**
      * @param campagne
      *            Data
@@ -76,14 +76,14 @@ public interface ICampaignService
      * @return Data
      */
     public boolean isBeforeEnd( String campagne, String phase ); // ..................................current < PHASE_END
-    
+
     /**
      * @param phase
      *            Data
      * @return Data
      */
     public boolean isBeforeEnd( String phase );
-    
+
     /**
      * @param campagne
      *            Data
@@ -99,7 +99,7 @@ public interface ICampaignService
      * @return Data
      */
     public boolean isAfterBeginning( String phase );
-    
+
     /**
      * @param campagne
      *            Data
@@ -108,14 +108,14 @@ public interface ICampaignService
      * @return Data
      */
     public boolean isBeforeBeginning( String campagne, String phase ); // ......current < PHASE_BEGINNING
-    
+
     /**
      * @param phase
      *            Data
      * @return Data
      */
     public boolean isBeforeBeginning( String phase );
-    
+
     /**
      * @param campagne
      *            Data
@@ -124,7 +124,7 @@ public interface ICampaignService
      * @return Data
      */
     public boolean isAfterEnd( String campagne, String phase ); // PHASE_END < current......
-    
+
     /**
      * @param phase
      *            Data
@@ -137,12 +137,12 @@ public interface ICampaignService
      */
     // Resets the internal cache of phases
     public void reset( );
+
     /**
      * Load the data of all the campaign objects and returns them as a referenceList
      * 
      * @return the referenceList which contains the data of all the campaign objects
      */
-	public ReferenceList getCampaignsReferenceList( );
-
+    public ReferenceList getCampaignsReferenceList( );
 
 }

@@ -56,12 +56,12 @@ import fr.paris.lutece.plugins.campaign.business.CampaignHome;
 @Controller( controllerJsp = "ManageAreas.jsp", controllerPath = "jsp/admin/plugins/campaign/", right = "CAMPAIGN_MANAGEMENT" )
 public class AreaJspBean extends AbstractManageCampaignsJspBean
 {
-    
-	/**
-	 * serialVersionUID
-	 */
-	private static final long serialVersionUID = -8585257960329982851L;
-	// Templates
+
+    /**
+     * serialVersionUID
+     */
+    private static final long serialVersionUID = -8585257960329982851L;
+    // Templates
     private static final String TEMPLATE_MANAGE_AREAS = "/admin/plugins/campaign/manage_areas.html";
     private static final String TEMPLATE_CREATE_AREA = "/admin/plugins/campaign/create_area.html";
     private static final String TEMPLATE_MODIFY_AREA = "/admin/plugins/campaign/modify_area.html";

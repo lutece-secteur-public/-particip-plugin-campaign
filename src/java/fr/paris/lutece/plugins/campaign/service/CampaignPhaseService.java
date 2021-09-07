@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2020, City of Paris
+ * Copyright (c) 2002-2021, City of Paris
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -32,6 +32,7 @@
  * License 1.0
  */
 package fr.paris.lutece.plugins.campaign.service;
+
 import java.util.Collection;
 
 import fr.paris.lutece.plugins.campaign.business.Phase;
@@ -43,7 +44,6 @@ import fr.paris.lutece.plugins.campaign.business.PhaseHome;
 public class CampaignPhaseService implements ICampaignPhaseService
 {
 
-    
     // SINGLETON
     private static ICampaignPhaseService _singleton;
 
@@ -54,19 +54,20 @@ public class CampaignPhaseService implements ICampaignPhaseService
     {
         if ( _singleton == null )
         {
-            _singleton = new CampaignPhaseService( ) ;
+            _singleton = new CampaignPhaseService( );
         }
         return _singleton;
     }
 
-	@Override
-    public Phase findPhaseByCampaignAndPhaseTypeCode( String campaignCode, String phaseTypeCode ) {
-		
-		return PhaseHome.findByCampaignCodeAndPhaseTypeCode(campaignCode, phaseTypeCode);
-	}
-	
-	@Override
-	public Collection<Phase> getPhasesListByCampaign( String campagneCode )
+    @Override
+    public Phase findPhaseByCampaignAndPhaseTypeCode( String campaignCode, String phaseTypeCode )
+    {
+
+        return PhaseHome.findByCampaignCodeAndPhaseTypeCode( campaignCode, phaseTypeCode );
+    }
+
+    @Override
+    public Collection<Phase> getPhasesListByCampaign( String campagneCode )
     {
         return PhaseHome.getPhasesListByCampaign( campagneCode );
     }

@@ -61,10 +61,10 @@ import fr.paris.lutece.plugins.campaign.service.Utils;
 public class PhaseJspBean extends AbstractManageCampaignsJspBean
 {
     /**
-	 * serialVersionUID
-	 */
-	private static final long serialVersionUID = 4443969792657721464L;
-	// Templates
+     * serialVersionUID
+     */
+    private static final long serialVersionUID = 4443969792657721464L;
+    // Templates
     private static final String TEMPLATE_MANAGE_PHASES = "/admin/plugins/campaign/manage_phases.html";
     private static final String TEMPLATE_CREATE_PHASE = "/admin/plugins/campaign/create_phase.html";
     private static final String TEMPLATE_MODIFY_PHASE = "/admin/plugins/campaign/modify_phase.html";

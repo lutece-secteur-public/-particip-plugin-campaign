@@ -56,7 +56,6 @@ public final class AreaDAO implements IAreaDAO
     private static final String SQL_QUERY_SELECTALL_ID = "SELECT id_area FROM campaign_area";
     private static final String SQL_QUERY_SELECT_REF_BY_CAMPAIGN = "SELECT area_code, title FROM campaign_area where campaign_code = ? ";
 
-
     /**
      * {@inheritDoc }
      */

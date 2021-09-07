@@ -62,7 +62,7 @@ public class Phase implements Serializable
     private String _strLabel;
 
     private int _nOrderNum;
-    
+
     @NotEmpty( message = "#i18n{campaign.validation.phase.CodePhaseType.notEmpty}" )
     @Size( max = 50, message = "#i18n{campaign.validation.phase.CodePhaseType.size}" )
     private String _strCodePhaseType;
@@ -106,7 +106,7 @@ public class Phase implements Serializable
      */
     public void setCampaignCode( String strCampaignCode )
     {
-    	_strCampaignCode = strCampaignCode;
+        _strCampaignCode = strCampaignCode;
     }
 
     /**
@@ -250,6 +250,7 @@ public class Phase implements Serializable
     {
         _nOrderNum = nOrderNum;
     }
+
     /**
      * Returns the CodePhaseType
      * 

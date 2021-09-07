@@ -61,24 +61,27 @@ public class Area implements Serializable
 
     private boolean _bActive;
 
-    
     /**
      * Returns the AreaCode
+     * 
      * @return The AreaCode
-     */ 
-     public String getAreaCode()
-     {
-         return _strAreaCode;
-     }
- 
+     */
+    public String getAreaCode( )
+    {
+        return _strAreaCode;
+    }
+
     /**
      * Sets the AreaCode
-     * @param strAreaCode The AreaCode
-     */ 
-     public void setAreaCode( String strAreaCode )
-     {
-         _strAreaCode = strAreaCode;
-     }
+     * 
+     * @param strAreaCode
+     *            The AreaCode
+     */
+    public void setAreaCode( String strAreaCode )
+    {
+        _strAreaCode = strAreaCode;
+    }
+
     /**
      * Returns the Id
      * 
@@ -118,7 +121,7 @@ public class Area implements Serializable
      */
     public void setCampaignCode( String strCampaignCode )
     {
-    	_strCampaignCode = strCampaignCode;
+        _strCampaignCode = strCampaignCode;
     }
 
     /**

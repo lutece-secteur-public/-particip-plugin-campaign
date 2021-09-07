@@ -88,16 +88,18 @@ public interface IPhaseDAO
      * @return The instance of the phase
      */
     Phase load( int nKey, Plugin plugin );
-    
+
     /**
      * 
-     * @param campaignCode the campaign code
-     * @param phaseTypeCode the phase type code
-     * @param plugin the plugin
+     * @param campaignCode
+     *            the campaign code
+     * @param phaseTypeCode
+     *            the phase type code
+     * @param plugin
+     *            the plugin
      * @return The instance of the phase
      */
     Phase findByCampaignCodeAndPhaseTypeCode( String campaignCode, String phaseTypeCode, Plugin plugin );
-
 
     /**
      * Load the data of all the phase objects and returns them as a list
@@ -144,5 +146,5 @@ public interface IPhaseDAO
      *            the Plugin
      * @return The collection which contains the data of all the campagnePhase objects
      */
-	Collection<Phase> selectPhasesListByCampaign(String campagneCode, Plugin _plugin);
+    Collection<Phase> selectPhasesListByCampaign( String campagneCode, Plugin _plugin );
 }

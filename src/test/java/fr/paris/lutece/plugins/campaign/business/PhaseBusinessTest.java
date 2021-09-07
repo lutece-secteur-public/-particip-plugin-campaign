@@ -45,10 +45,10 @@ public class PhaseBusinessTest extends LuteceTestCase
 {
     private static final String CODECAMPAIGN1 = "A";
     private static final String CODECAMPAIGN2 = "B";
-    private static final LocalDateTime STARTINGDATE1 =  LocalDateTime.of(2021, 6, 16, 12, 00);
-    private static final LocalDateTime STARTINGDATE2 = LocalDateTime.of(2022, 6, 16, 12, 00);
-    private static final LocalDateTime ENDINGDATE1 = LocalDateTime.of(2021, 9, 16, 12, 00);
-    private static final LocalDateTime ENDINGDATE2 = LocalDateTime.of(2022, 9, 16, 12, 00);
+    private static final LocalDateTime STARTINGDATE1 = LocalDateTime.of( 2021, 6, 16, 12, 00 );
+    private static final LocalDateTime STARTINGDATE2 = LocalDateTime.of( 2022, 6, 16, 12, 00 );
+    private static final LocalDateTime ENDINGDATE1 = LocalDateTime.of( 2021, 9, 16, 12, 00 );
+    private static final LocalDateTime ENDINGDATE2 = LocalDateTime.of( 2022, 9, 16, 12, 00 );
     private static final String LABEL1 = "Label1";
     private static final String LABEL2 = "Label2";
     private static final int ORDERNUM1 = 1;

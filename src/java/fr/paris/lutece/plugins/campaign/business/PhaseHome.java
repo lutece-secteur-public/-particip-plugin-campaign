@@ -137,6 +137,7 @@ public final class PhaseHome
     {
         return _dao.selectPhasesReferenceList( _plugin );
     }
+
     /**
      * Load the data of all the phase type objects and returns them as a referenceList
      * 
@@ -146,20 +147,23 @@ public final class PhaseHome
     {
         return _dao.selectPhasesTypeReferenceList( _plugin );
     }
-    
+
     /**
      * 
-     * @param campaignCode the campaign code
-     * @param phaseTypeCode the phase type code
-     * @param plugin the plugin
+     * @param campaignCode
+     *            the campaign code
+     * @param phaseTypeCode
+     *            the phase type code
+     * @param plugin
+     *            the plugin
      * @return The instance of the phase
      */
-    public static Phase findByCampaignCodeAndPhaseTypeCode( String campaignCode, String phaseTypeCode ) {
-    	
-    	return _dao.findByCampaignCodeAndPhaseTypeCode( campaignCode, phaseTypeCode, _plugin);
+    public static Phase findByCampaignCodeAndPhaseTypeCode( String campaignCode, String phaseTypeCode )
+    {
+
+        return _dao.findByCampaignCodeAndPhaseTypeCode( campaignCode, phaseTypeCode, _plugin );
     }
 
-    
     /**
      * Load the data of all the campagnePhase objects for a campagne and returns them in form of a collection
      * 

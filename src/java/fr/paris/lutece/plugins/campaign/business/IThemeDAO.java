@@ -116,7 +116,7 @@ public interface IThemeDAO
      * @return The referenceList which contains the data of all the theme objects
      */
     ReferenceList selectThemesReferenceList( Plugin plugin );
-    
+
     /**
      * Load the data of all the Theme objects for a campaign and returns them as a collection
      * 
@@ -126,18 +126,18 @@ public interface IThemeDAO
      *            the Plugin
      * @return The collection which contains the data of all the Theme objects
      */
-	Collection<Theme> selectThemesListByCampaign(String codeCampaign, Plugin plugin);
+    Collection<Theme> selectThemesListByCampaign( String codeCampaign, Plugin plugin );
 
-	/**
+    /**
      * Load the data of all the Theme objects mapped from campaign and returns them as a map
      * 
      * @param plugin
      *            the Plugin
      * @return The collection which contains the data of all the Theme objects
      */
-	Map<String, List<Theme>> selectThemesMapByCampaign(Plugin plugin);
+    Map<String, List<Theme>> selectThemesMapByCampaign( Plugin plugin );
 
-	/**
+    /**
      * Load the data from the table
      * 
      * @param codeTheme
@@ -146,5 +146,5 @@ public interface IThemeDAO
      *            the Plugin
      * @return The instance of the Theme
      */
-	Theme loadByCodeTheme(String codeTheme, Plugin plugin);
+    Theme loadByCodeTheme( String codeTheme, Plugin plugin );
 }

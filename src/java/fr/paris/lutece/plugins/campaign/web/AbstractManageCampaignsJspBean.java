@@ -49,14 +49,13 @@ import javax.servlet.http.HttpServletRequest;
  */
 public abstract class AbstractManageCampaignsJspBean extends MVCAdminJspBean
 {
-    
 
-	/**
-	 * serialVersionUID
-	 */
-	private static final long serialVersionUID = 1544014074491970232L;
+    /**
+     * serialVersionUID
+     */
+    private static final long serialVersionUID = 1544014074491970232L;
 
-	// Rights
+    // Rights
     public static final String RIGHT_MANAGECAMPAIGNS = "CAMPAIGN_MANAGEMENT";
 
     // Properties

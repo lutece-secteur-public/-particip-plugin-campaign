@@ -55,11 +55,11 @@ import fr.paris.lutece.plugins.campaign.business.CampaignHome;
 @Controller( controllerJsp = "ManageCampaigns.jsp", controllerPath = "jsp/admin/plugins/campaign/", right = "CAMPAIGN_MANAGEMENT" )
 public class CampaignJspBean extends AbstractManageCampaignsJspBean
 {
-	/**
-	 * serialVersionUID
-	 */
-	private static final long serialVersionUID = 2485209123338980294L;
-	// Templates
+    /**
+     * serialVersionUID
+     */
+    private static final long serialVersionUID = 2485209123338980294L;
+    // Templates
     private static final String TEMPLATE_MANAGE_CAMPAIGNS = "/admin/plugins/campaign/manage_campaigns.html";
     private static final String TEMPLATE_CREATE_CAMPAIGN = "/admin/plugins/campaign/create_campaign.html";
     private static final String TEMPLATE_MODIFY_CAMPAIGN = "/admin/plugins/campaign/modify_campaign.html";
@@ -99,7 +99,7 @@ public class CampaignJspBean extends AbstractManageCampaignsJspBean
     private static final String INFO_CAMPAIGN_CREATED = "campaign.info.campaign.created";
     private static final String INFO_CAMPAIGN_UPDATED = "campaign.info.campaign.updated";
     private static final String INFO_CAMPAIGN_REMOVED = "campaign.info.campaign.removed";
-    
+
     private static final String ERROR_CAMPAIGN_CODE_ALREADY_USED = "campaign.error.campaign_code.already.used";
 
     // Session variable to store working values
@@ -164,10 +164,11 @@ public class CampaignJspBean extends AbstractManageCampaignsJspBean
         {
             return redirectView( request, VIEW_CREATE_CAMPAIGN );
         }
-        if( CampaignHome.findByCampaignCode(_campaign.getCampaignCode( ) ) != null ) {
-        	
+        if ( CampaignHome.findByCampaignCode( _campaign.getCampaignCode( ) ) != null )
+        {
+
             addError( ERROR_CAMPAIGN_CODE_ALREADY_USED, getLocale( ) );
-        	return redirectView( request, VIEW_CREATE_CAMPAIGN );
+            return redirectView( request, VIEW_CREATE_CAMPAIGN );
         }
         CampaignHome.create( _campaign );
         addInfo( INFO_CAMPAIGN_CREATED, getLocale( ) );
