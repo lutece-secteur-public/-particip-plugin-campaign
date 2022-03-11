@@ -52,6 +52,7 @@ import javax.servlet.http.HttpServletRequest;
 import fr.paris.lutece.plugins.campaign.business.CampaignHome;
 import fr.paris.lutece.plugins.campaign.business.Phase;
 import fr.paris.lutece.plugins.campaign.business.PhaseHome;
+import fr.paris.lutece.plugins.campaign.service.CampaignService;
 import fr.paris.lutece.plugins.campaign.service.Utils;
 
 /**
@@ -281,7 +282,7 @@ public class PhaseJspBean extends AbstractManageCampaignsJspBean
 
         PhaseHome.update( _phase );
         addInfo( INFO_PHASE_UPDATED, getLocale( ) );
-	CampaignService.getInstance( ).reset( );
+        CampaignService.getInstance( ).reset( );
         return redirectView( request, VIEW_MANAGE_PHASES );
     }
 }
