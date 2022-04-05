@@ -53,6 +53,7 @@ import fr.paris.lutece.plugins.campaign.business.CampaignHome;
 import fr.paris.lutece.plugins.campaign.business.Phase;
 import fr.paris.lutece.plugins.campaign.business.PhaseHome;
 import fr.paris.lutece.plugins.campaign.service.Utils;
+import fr.paris.lutece.plugins.campaign.service.CampaignService;
 
 /**
  * This class provides the user interface to manage Phase features ( manage, create, modify, remove )
@@ -281,7 +282,7 @@ public class PhaseJspBean extends AbstractManageCampaignsJspBean
 
         PhaseHome.update( _phase );
         addInfo( INFO_PHASE_UPDATED, getLocale( ) );
-
+	CampaignService.getInstance( ).reset( );
         return redirectView( request, VIEW_MANAGE_PHASES );
     }
 }
