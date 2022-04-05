@@ -282,7 +282,9 @@ public class PhaseJspBean extends AbstractManageCampaignsJspBean
 
         PhaseHome.update( _phase );
         addInfo( INFO_PHASE_UPDATED, getLocale( ) );
+
         CampaignService.getInstance( ).reset( );
+
         return redirectView( request, VIEW_MANAGE_PHASES );
     }
 }
